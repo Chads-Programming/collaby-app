@@ -1,15 +1,23 @@
 "use client";
 import React from "react";
-import { JobCard, Pagination } from "@/app/(jobs)/components";
+import { Pagination } from "@/app/(jobs)/components";
 import {
   DesktopFilter,
   MobileFilters,
 } from "../filters-sidebar/filters-sidebar";
+import dynamic from "next/dynamic";
+
+const JobCard = dynamic(
+  () => import("@/app/(jobs)/components").then((m) => m.JobCard),
+  {
+    ssr: false,
+  },
+);
 
 export function MainContent() {
   return (
-    <div className="flex flex-col md:flex-row  gap-10 p-10">
-      <aside className="hidden md:flex w-60">
+    <div className="flex flex-col gap-10  p-10 md:flex-row">
+      <aside className="hidden w-60 md:flex">
         <DesktopFilter />
       </aside>
       <header className="flex md:hidden">
@@ -22,6 +30,7 @@ export function MainContent() {
             logo="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png"
             platform="Notion"
             title="Software Engineer"
+            slug="software-engineer"
             location="Madrid"
             budget={"50-80"}
             date={new Date()}
@@ -30,7 +39,7 @@ export function MainContent() {
                 incidunt explicabo fugit assumenda earum aut harum, non eius?
                 Distinctio, sapiente pariatur iure dolorem nam."
           />
-          ))}
+        ))}
         <Pagination currentPage={1} />
       </section>
     </div>

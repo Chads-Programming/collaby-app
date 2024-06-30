@@ -26,6 +26,9 @@ model Projects {
     title       String
     logoUrl     String?
     description String?
+    size        Size
+    remuneration Remuneration
+    role        Role
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     User        User?    @relation(fields: [createdById], references: [id])
@@ -37,6 +40,25 @@ model Projects {
     collaborators ProjectCollaborator[]
 
     @@index([title])
+}
+
+enum Size {
+    ANY
+    SMALL
+    MEDIUM
+    BIG
+}
+
+enum Remuneration {
+    PAID
+    VOLUNTEER
+    STOCK
+}
+
+enum Role {
+    BACKEND
+    FRONTEND
+    FULLSTACK
 }
 
 model ProjectCollaborator {

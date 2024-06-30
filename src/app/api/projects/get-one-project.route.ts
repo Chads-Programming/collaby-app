@@ -2,8 +2,17 @@ import { NextApiHandler } from "next";
 import { NextResponse } from "next/server";
 import getOneProject from "@/server/projects/get-one-project";
 
-export const getOneProjectHandler: NextApiHandler = async (req) => {
+export const getOneProjectHandler: NextApiHandler = async (
+  _req,
+  {
+    params,
+  }: {
+    params: { id: string };
+  },
+) => {
   try {
+    const id = params.id;
+
     const update = await getOneProject(id);
 
     return NextResponse.json({

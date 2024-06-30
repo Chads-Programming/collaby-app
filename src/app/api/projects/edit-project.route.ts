@@ -12,7 +12,6 @@ export const updateProjectHandler: NextApiHandler = async (
     const body = await req.json();
 
     const updateProjectData = UpdateProjectDto.parse(body);
-    console.log(id);
 
     const update = await updateProject(updateProjectData, id);
 
@@ -21,7 +20,6 @@ export const updateProjectHandler: NextApiHandler = async (
       data: update,
     });
   } catch (error) {
-    console.log({ error });
     return NextResponse.json({
       message: "Error while editing Project",
     });

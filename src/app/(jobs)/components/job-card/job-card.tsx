@@ -27,7 +27,7 @@ export const JobCard = ({
   ...props
 }: JobCardProps) => {
   return (
-    <div
+    <article
       className={cn(
         "items-start justify-start gap-5 bg-white p-5 shadow md:flex",
         className,
@@ -80,6 +80,6 @@ export const JobCard = ({
 
         <Paragraph className="mt-2 text-neutral-600">{description}</Paragraph>
       </div>
-    </div>
+    </article>
   );
 };

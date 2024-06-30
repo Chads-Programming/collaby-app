@@ -1,9 +1,5 @@
-import { NextHandler } from "@/types";
+import type { NextHandler } from "@/types";
 import { getAuth } from "@clerk/nextjs/server";
-<<<<<<< HEAD
-import { type NextApiHandler } from "next";
-=======
->>>>>>> df80bc9 (feat: api handler update)
 import { NextResponse } from "next/server";
 
 export const userMiddleware = (handler: NextHandler) => (...props: Parameters<NextHandler>) => {

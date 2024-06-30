@@ -10,6 +10,7 @@ import {
   ClerkProvider
 } from '@clerk/nextjs'
 import { ModalContainer } from "./shared/components/modal-container";
+import { NavBar } from "@/app/components";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
           <ModalContainer />
+          <NavBar />
           {children}
         </ClerkProvider>
       </body>

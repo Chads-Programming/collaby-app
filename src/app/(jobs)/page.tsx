@@ -1,11 +1,9 @@
-import { NavBar } from "@/app/components";
 import { Hero } from "@/app/(jobs)/components";
 import { MainContent } from "./components/main-content/main-content";
 
 export default async function JobsPage() {
   return (
     <main className="flex min-h-screen flex-col bg-muted bg-gradient-to-b text-white">
-      <NavBar />
       <Hero />
       {/* <section className="items-start justify-start gap-10 p-10 md:flex"> */}
       {/*   <Filter /> */}

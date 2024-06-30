@@ -1,5 +1,5 @@
-import createProject from "@/server/projects/create-project";
 import { userMiddleware } from "../_middlewares/auth.middleware";
+import { createProjectHandler } from "./create-project.route";
 
 
-export POST = userMiddleware(createProject)
+export const POST = userMiddleware(createProjectHandler)

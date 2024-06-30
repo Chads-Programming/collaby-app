@@ -24,8 +24,8 @@ model User {
 model Projects {
     id          String   @id @default(uuid())
     title       String
-    logoUrl     String
-    description String
+    logoUrl     String?
+    description String?
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     User        User?    @relation(fields: [createdById], references: [id])

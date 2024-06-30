@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import getOneProject from "@/server/projects/get-one-project";
-<<<<<<< HEAD
 import type { NextHandler } from "@/types";
-=======
-import { NextHandler } from "@/types";
->>>>>>> 68ad7d1deb5808f7d8f933858d13cbd61df5bf03
 
 export const getOneProjectHandler: NextHandler = async (
   _req,

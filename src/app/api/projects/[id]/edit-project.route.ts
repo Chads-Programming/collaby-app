@@ -1,16 +1,16 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { UpdateProjectDto } from "../../../server/projects/dtos/update-project.dto";
+import { UpdateProjectDto } from "@/server/projects/dtos/update-project.dto";
 import updateProject from "@/server/projects/edit-project";
 import type { NextHandler } from "@/types";
-import type { BodyProject } from "./types";
+import type { BodyProject } from "../types";
 
-export const updateProjectHandler: NextHandler = async (
+export const editProjectHandler: NextHandler = async (
   req: NextRequest,
   { params }: { params: { id: string } },
 ) => {
   try {
     const id = params.id;
-    const body = (await req.json()) as BodyProject;
+    const body = req.body as unknown as BodyProject;
 
     const updateProjectData = UpdateProjectDto.parse(body);
 

@@ -9,8 +9,7 @@ const cache = new NodeCache({
 })
 
 const isProtectedRoute = createRouteMatcher([
-  '/dashboard(.*)',
-  '/api/projects(.*)'
+  '/dashboard(.*)'
 ]);
 
 export default clerkMiddleware(async (_auth, req) => {

@@ -1,4 +1,10 @@
-export type ParamsFilters = [Size, Remuneration, Role, Date];
+export type ParamsFilters = {
+  size?: Size;
+  date?: string;
+  remuneration?: string;
+  role?: string;
+};
+
 
 type Size = ["ANY", "SMALL", "MEDIUM", "BIG"];
 type Remuneration = ["PAID", "VOLUNTEER", "STOCK"];

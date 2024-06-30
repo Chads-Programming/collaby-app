@@ -12,7 +12,7 @@ interface PaginationProps {
   currentPage: number
 }
 
-export const Pagination = ({ currentPage = 1 }: PaginationProps) => {
+export const Pagination = ({ currentPage }: PaginationProps) => {
   return (
     <PaginationRadix>
       <PaginationContent>

@@ -15,7 +15,7 @@ export function Filter() {
 
 export function MobileFilters() {
   return (
-    <div className="flex md:flex-col w-full gap-2 md:max-w-[200px]">
+    <div className="flex md:flex-col w-full gap-2 md:max-w-[200px] md:hidden">
       <Sheet>
         <SheetTrigger className="w-full flex items-center" asChild>
           <Button className="bg-white text-black hover:bg-background border-input border-2">
@@ -80,7 +80,7 @@ const GeneralFilter = () => {
   });
 
   return (
-    <Card className="w-full max-w-xs border-none md:shadow-md">
+    <Card className="w-full max-w-lg border-none md:shadow-md">
       <CardHeader className="px-4 pt-4 pb-2">
         <CardTitle>Filters</CardTitle>
       </CardHeader>

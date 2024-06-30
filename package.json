@@ -1,4 +1,4 @@
-{ 
+{
   "name": "collaby-t3-app",
   "version": "0.1.0",
   "private": true,
@@ -31,12 +31,14 @@
     "@trpc/react-query": "next",
     "@trpc/server": "next",
     "@uploadthing/react": "^6.7.2",
+    "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "geist": "^1.3.0",
     "lucide-react": "^0.399.0",
     "next": "^14.2.1",
+    "node-cache": "^5.1.2",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-hook-form": "^7.52.0",

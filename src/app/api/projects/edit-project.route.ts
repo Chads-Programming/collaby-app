@@ -2,8 +2,9 @@ import { type NextApiHandler } from "next";
 import { NextResponse } from "next/server";
 import { UpdateProjectDto } from "../../../server/projects/dtos/update-project.dto";
 import updateProject from "@/server/projects/edit-project";
+import { NextHandler } from "@/types";
 
-export const updateProjectHandler: NextApiHandler = async (
+export const updateProjectHandler: NextHandler = async (
   req,
   { params }: { params: { id: string } },
 ) => {

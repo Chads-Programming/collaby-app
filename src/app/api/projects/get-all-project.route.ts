@@ -1,11 +1,19 @@
 import getAllProjects from "@/server/projects/get-all-projects";
-import { type NextApiHandler } from "next";
-import { NextResponse } from "next/server";
 import type { ParamsFilters } from "./types";
 
-export const getAllProjectsHandler: NextApiHandler = async (req) => {
+import { NextResponse } from "next/server";
+import { NextHandler } from "@/types";
+
+export const getAllProjectHandler: NextHandler = async (
+  _req,
+  {
+    params,
+  }: {
+    params: { id: string };
+  },
+) => {
   try {
-    const URLParamsQuery = new URLSearchParams(req.url);
+    const URLParamsQuery = new URLSearchParams(_req.url);
 
     const extractParams: ["size", "date", "remuneration", "role"] = [
       "size",

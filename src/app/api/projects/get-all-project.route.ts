@@ -14,13 +14,13 @@ export const getAllProjectHandler: NextHandler = async (req: NextRequest) => {
       "role",
     ];
 
-    const params = extractParams.map((param) => {
-      return {
-        [param]: URLParamsQuery.get(param),
-      };
-    }) as ParamsFilters[];
+    // const params = extractParams.map((param) => {
+    //   return {
+    //     [param]: URLParamsQuery.get(param),
+    //   };
+    // }) as ParamsFilters[];
 
-    const project = await getAllProjects(params);
+    const project = await getAllProjects();
 
     return NextResponse.json({
       message: "Project find by id",

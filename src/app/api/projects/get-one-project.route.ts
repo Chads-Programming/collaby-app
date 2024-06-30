@@ -1,14 +1,8 @@
-// @ts-nocheck
 import { NextResponse } from "next/server";
 import getOneProject from "@/server/projects/get-one-project";
 import type { NextHandler } from "@/types";
 
-export const getOneProjectHandler: NextHandler = async (
-  _req,
-  {
-    params
-  }: any,
-) => {
+export const getOneProjectHandler: NextHandler = async (_req, { params }) => {
   try {
     const id = params.id;
 

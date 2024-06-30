@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import {
   ClerkProvider
 } from '@clerk/nextjs'
+import { ModalContainer } from "./shared/components/modal-container";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function RootLayout({
              */
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
+          <ModalContainer />
           {children}
         </ClerkProvider>
       </body>

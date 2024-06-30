@@ -17,7 +17,7 @@ const fontSans = FontSans({
 })
 
 export const metadata = {
-  title: "Collaby",
+  title: "Collably",
   description: "Bring your dreams to reality",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };

@@ -1,9 +1,9 @@
-# Collaby App
+# Collably App
 
 
-## What's Collaby?
+## What's Collably?
 
-Collaby is an app for developers looking for new projects to collaborate
+Collably is an app for developers looking for new projects to collaborate
 
 - [Next.js](https://nextjs.org)
 - [Clerk](https://clerk.com)

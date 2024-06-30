@@ -1,9 +1,9 @@
-import type { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export type NextHandler = (
   req: NextRequest,
   { params }: { params: Params },
-) => unknown;
+) => void | Response | Promise<void | Response>;
 
 interface Params {
   id: string;

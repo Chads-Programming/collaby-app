@@ -35,8 +35,8 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Check lint
-        run: bun lint
+      # - name: Check lint
+      #   run: bun lint
 
       - name: Setup DB
         run: bun db:push

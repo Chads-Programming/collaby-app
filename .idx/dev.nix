@@ -14,9 +14,6 @@
     previews = {
       web = {
         command = [
-          "echo",
-          ":V",
-          "&",
           "npm"
           "run"
           "dev"

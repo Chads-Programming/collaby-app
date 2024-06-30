@@ -1,11 +1,13 @@
 
 "use server";
 
-import { createProjectSchema } from "@/app/api/projects/dtos/create-project.dto";
+import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
+
 
 export async function createProjectAction(data: unknown): Promise<boolean> {
   try {
-    const projectData = createProjectSchema.parse(data)
+    const projectData = CreateProjectDto.parse(data)
+
 
     projectData.title
     return true

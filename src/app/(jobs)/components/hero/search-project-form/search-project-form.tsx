@@ -15,7 +15,7 @@ export default function SearchProjectForm() {
     },
   });
   const state = watch();
-  const onFormSubmit = (data) => {
+  const onFormSubmit = (data: unknown) => {
     //TODO: add filter when kirbe finish stuff things (im pretty sure this can't be done soon.)
   };
   return (

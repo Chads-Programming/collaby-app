@@ -4,7 +4,7 @@ import type { ParamsFilters } from "./types";
 import { NextResponse } from "next/server";
 import { NextHandler } from "@/types";
 
-export const getAllProjectHandler: NextHandler = async (
+export const getAllProjectsHandler: NextHandler = async (
   _req,
   {
     params,

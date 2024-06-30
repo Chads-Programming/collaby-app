@@ -7,7 +7,7 @@ interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 
 export const Heading = ({
   as: As = "h2",
-  className = "",
+  className,
   ...props
 }: HeadingProps) => {
   return (

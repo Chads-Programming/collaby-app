@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { NavBar } from "@/app/components";
-import { JobCard } from "@/app/(jobs)/components";
-import Hero from "./components/hero/hero";
+import { Hero, JobCard } from "@/app/(jobs)/components";
 
 export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col bg-gradient-to-b text-white">
       <NavBar />
+      <Hero />
 
       <JobCard
         logo="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png"

@@ -2,7 +2,7 @@ import React from "react";
 import SearchProjectForm from "./search-project-form/search-project-form";
 import AnimatedBgGrid from "@/components/ui/animated-bg-grid";
 
-export default function Hero() {
+export function Hero() {
   return (
     <section className="relative z-10 shadow">
       <AnimatedBgGrid className="z-0" />

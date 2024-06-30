@@ -28,7 +28,7 @@ const NavbarLinks = () => (
     ))}
   </>
 );
-export default async function NavBar() {
+export const NavBar = async () => {
   const { userId } = auth();
   return (
     <nav className="flex w-full bg-white px-3 py-2 md:px-8 shadow md:shadow-md border-b">

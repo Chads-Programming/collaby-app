@@ -15,18 +15,11 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          envkey_DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-          
-          envkey_NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          envkey_NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          envkey_NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          envkey_CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
 
-          envkey_GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
-          envkey_GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
-
-          envkey_DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
-          envkey_DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
-
-          envkey_CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+          envkey_UPLOADTHING_SECRET: ${{ secrets.UPLOADTHING_SECRET }}
+          envkey_UPLOADTHING_APP_ID: ${{ secrets.UPLOADTHING_APP_ID }}
 
           file_name: .env
           fail_on_empty: false  

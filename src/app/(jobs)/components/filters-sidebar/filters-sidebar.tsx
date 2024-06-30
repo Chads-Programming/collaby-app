@@ -15,7 +15,7 @@ export function Filter() {
 
 export function MobileFilters() {
   return (
-    <div className="flex w-full mt-2 text-black">
+    <div className="flex w-full mt-2 md:max-w-xs">
       <Sheet>
         <SheetTrigger className="w-full flex items-center" asChild>
           <Button className="bg-white text-black hover:bg-background border-input border-2">

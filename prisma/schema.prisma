@@ -10,11 +10,85 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model User {
+    id                   String                @id @default(cuid())
+    name                 String?
+    email                String?               @unique
+    emailVerified        DateTime?
+    image                String?
+    oauthId              String                @unique
+    projects             Projects[]
+    projectCollaborators ProjectCollaborator[]
+}
 
-    @@index([name])
+model Projects {
+    id          String   @id @default(uuid())
+    title       String
+    logoUrl     String
+    description String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    User        User?    @relation(fields: [createdById], references: [id])
+    createdById String?
+
+    links         ProjectLink[]
+    tags          ProjectTags[]
+    projectRoles  ProjectRole[]
+    collaborators ProjectCollaborator[]
+
+    @@index([title])
+}
+
+model ProjectCollaborator {
+    id Int @id @default(autoincrement())
+
+    project   Projects @relation(fields: [projectId], references: [id])
+    projectId String
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String
+
+    @@unique([projectId, userId])
+}
+
+model Roles {
+    id           Int           @id @default(autoincrement())
+    name         String        @unique
+    projectRoles ProjectRole[]
+}
+
+model ProjectRole {
+    id Int @id @default(autoincrement())
+
+    project   Projects @relation(fields: [projectId], references: [id])
+    projectId String
+    role      Roles    @relation(fields: [roleId], references: [id])
+    roleId    Int
+
+    @@unique([projectId, roleId])
+}
+
+model Tags {
+    id          Int           @id @default(autoincrement())
+    name        String        @unique
+    projectTags ProjectTags[]
+}
+
+model ProjectTags {
+    id        Int      @id @default(autoincrement())
+    project   Projects @relation(fields: [projectId], references: [id])
+    projectId String
+    tags      Tags     @relation(fields: [tagId], references: [id])
+    tagId     Int
+
+    @@unique([projectId, tagId])
+}
+
+model ProjectLink {
+    id         Int       @id @default(autoincrement())
+    iconUrl    String
+    text       String
+    value      String
+    Projects   Projects? @relation(fields: [projectsId], references: [id])
+    projectsId String?
 }

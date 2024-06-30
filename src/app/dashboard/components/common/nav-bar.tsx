@@ -2,16 +2,12 @@
 import Link from "next/link"
 import {
   Home,
-  Package
+  Package,
+  Icon,
+  Type
 } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils";
-
-interface IRoute {
-  label: string;
-  icon?: typeof Home;
-  url: string;
-}
 
 const routes = [
   {

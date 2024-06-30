@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { NAVBAR_ITEMS } from "@/lib/constants";
 
 import { auth } from "@clerk/nextjs/server";
-import { SignInButton } from "@clerk/nextjs";
+import { SignInButton, SignOutButton } from "@clerk/nextjs";
 import {
   Sheet,
   SheetContent,
@@ -28,20 +28,33 @@ const NavbarLinks = () => (
     ))}
   </>
 );
+
 export const NavBar = async () => {
   const { userId } = auth();
   return (
     <nav className="flex w-full bg-white px-3 py-2 md:px-8 shadow md:shadow-md border-b">
       <ul className="w-full gap-4 hidden md:flex md:items-center">
-        <li>
+        <Link href="/">
           <span className="text-primary text-2xl font-semibold">Collably</span>
-        </li>
+        </Link>
         <div className="flex-1" />
         <NavbarLinks />
         <div className="flex-1" />
-        <Button asChild>
-          <li>Sign Up</li>
-        </Button>
+        {
+          !userId ? <li>
+            <SignInButton>
+              <Button>
+                Log In
+              </Button>
+            </SignInButton>
+          </li>
+            : <SignOutButton>
+              <Button>
+                Sign Out
+              </Button>
+            </SignOutButton>
+
+        }
       </ul>
       <div className="flex w-full justify-between items-center md:hidden">
         <span className="text-primary text-2xl font-semibold">Collably</span>

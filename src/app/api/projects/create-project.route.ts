@@ -5,17 +5,19 @@ import { NextResponse } from "next/server";
 
 export const createProjectHandler: NextApiHandler = async (req) => {
   try {
-    const projectData = CreateProjectDto.parse(req.body);
-    const project = await createProject(projectData)
-    return NextResponse.json({
-      message: 'Project Created',
-      data: project
-    })
+    const body = await req.json();
 
+    const projectData = CreateProjectDto.parse(body);
+
+    const project = await createProject(projectData);
+
+    return NextResponse.json({
+      message: "Project Created",
+      data: project,
+    });
   } catch (error) {
-
     return NextResponse.json({
-      message: 'Error while creating Project'
-    })
+      message: "Error while creating Project",
+    });
   }
-}
+};

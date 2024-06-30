@@ -28,12 +28,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <ClerkProvider>
-        <body
-          className={cn(
-            fontSans.variable
-          )}>
+      <body
+        className={cn(
+          fontSans.variable
+        )}>
 
+        <ClerkProvider>
           <NextSSRPlugin
             /**
              * The `extractRouterConfig` will extract **only** the route configs
@@ -44,8 +44,8 @@ export default function RootLayout({
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
           {children}
-        </body>
-      </ClerkProvider>
+        </ClerkProvider>
+      </body>
     </html>
   );
 }

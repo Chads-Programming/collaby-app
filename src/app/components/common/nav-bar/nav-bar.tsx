@@ -18,7 +18,7 @@ const NavbarLinks = () => (
   <>
     {NAVBAR_ITEMS.map((item) => (
       <li className="text-black">
-        <Button variant="ghost" asChild>
+        <Button variant="ghost"asChild>
           <Link className="flex gap-4" href={item.href}>
             <item.icon />
             {item.label}

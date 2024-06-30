@@ -18,7 +18,6 @@ export default async function updateProject(
       },
     });
 
-    console.log({ project });
     return project;
   } catch (error) {
     console.log({ error });

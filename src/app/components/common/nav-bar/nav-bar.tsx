@@ -17,7 +17,7 @@ import {
 const NavbarLinks = () => (
   <>
     {NAVBAR_ITEMS.map((item) => (
-      <li className="text-black" key={item.label}>
+      <li className="text-black" key={item.href}>
         <Button variant="ghost" asChild>
           <Link className="flex gap-4" href={item.href}>
             <item.icon />

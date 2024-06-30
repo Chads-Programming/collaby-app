@@ -14,18 +14,7 @@ export interface unsafe_clerk_user {
   totp_enabled: boolean;
   backup_code_enabled: boolean;
   email_addresses: EmailAddress[];
-  //antes eran any
-  phone_numbers: string[];
-  //antes eran any
-  web3_wallets: string[];
-  //antes eran any
-  passkeys: string[];
   external_accounts: ExternalAccount[];
-  //antes eran any
-  saml_accounts: string[];
-  public_metadata: Metadata;
-  private_metadata: Metadata;
-  unsafe_metadata: Metadata;
   external_id: null;
   last_sign_in_at: number;
   banned: boolean;
@@ -78,13 +67,8 @@ interface ExternalAccount {
   avatar_url: string;
   image_url: string;
   username: string;
-  public_metadata: Metadata;
   label: null;
   created_at: number;
   updated_at: number;
   verification: Verification;
-}
-
-interface Metadata {
-  data: string;
 }

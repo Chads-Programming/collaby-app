@@ -1,7 +1,31 @@
 import { Hero } from "@/app/(jobs)/components";
 import { MainContent } from "./components/main-content/main-content";
+import { createFakeProjects } from "@/lib/mock/projects/project.mock";
+import { prisma } from "@/lib/prisma";
+import { Size } from "@prisma/client";
 
-export default async function JobsPage() {
+export default async function JobsPage({
+  searchParams: { page, count, projectSize },
+}: {
+  searchParams: {
+    page?: string;
+    count?: string;
+    projectSize?: Size;
+  };
+}) {
+  // const projectsFake = await createFakeProjects();
+  //
+  //
+  //TODO: MOVE THIS TO A FUNCTION
+  const parsedCount = count ? parseInt(count) : 10;
+  const parsedPage = page ? parseInt(page) : 0;
+  const projects = await prisma.projects.findMany({
+    where: {
+      size: projectSize || undefined,
+    },
+    take: parsedCount,
+    skip: parsedCount * parsedPage,
+  });
   return (
     <main className="flex min-h-screen flex-col bg-muted bg-gradient-to-b text-white">
       <Hero />
@@ -26,7 +50,7 @@ export default async function JobsPage() {
       {/*   </div> */}
       {/* </section> */}
 
-      <MainContent />
+      <MainContent projects={projects} />
       {/* <Image src="/collaby-logo.svg" width={200} height={200} alt="logo" /> */}
     </main>
   );

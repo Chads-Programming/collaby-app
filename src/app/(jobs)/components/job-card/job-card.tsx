@@ -38,13 +38,15 @@ export const JobCard = ({
       {...props}
     >
       <div className="mb-5 flex items-center justify-start gap-2 md:mb-0 md:block">
-        <Image
-          src={logo}
-          width={100}
-          height={100}
-          className="w-10 md:w-24"
-          alt={"Logo"}
-        />
+        {/* <Image */}
+        {/*   src={logo} */}
+        {/*   width={100} */}
+        {/*   height={100} */}
+        {/*   className="w-10 md:w-24" */}
+        {/*   alt={"Logo"} */}
+        {/* /> */}
+
+        <img src={logo} className="w-10 md:w-24" alt={"Logo"} />
         <Paragraph className="text-lg font-medium md:hidden">
           {platform}
         </Paragraph>

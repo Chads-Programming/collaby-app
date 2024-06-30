@@ -8,6 +8,7 @@ import { ChevronDown, FilterIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export function Filter() {
   return <MobileFilters />;
@@ -66,6 +67,10 @@ export function DesktopFilter() {
 }
 
 const GeneralFilter = () => {
+  const searchParams = useSearchParams();
+  console.log();
+
+  console.log({ searchParams });
   const { register, watch, setValue, control } = useForm({
     defaultValues: {
       projectSize: "any",
@@ -78,6 +83,13 @@ const GeneralFilter = () => {
       },
     },
   });
+
+  const getNewSearchParams = (key: string, value: string) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set(key, value);
+
+    return `?${newSearchParams.toString()}`;
+  };
 
   return (
     <Card className="w-full max-w-lg border-none md:shadow-md">
@@ -98,19 +110,27 @@ const GeneralFilter = () => {
           >
             <ul className="space-y-1">
               <li className="flex items-center space-x-2">
-                <RadioGroupItem value="any" id="any" defaultChecked />
+                <Link href={getNewSearchParams("projectSize", "ANY")}>
+                  <RadioGroupItem value="any" id="any" defaultChecked />
+                </Link>
                 <Label htmlFor="any">Any</Label>
               </li>
               <li className="flex items-center space-x-2">
-                <RadioGroupItem value="small" id="small" />
+                <Link href={getNewSearchParams("projectSize", "SMALL")}>
+                  <RadioGroupItem value="small" id="small" />
+                </Link>
                 <Label htmlFor="small"> Small </Label>
               </li>
               <li className="flex items-center space-x-2">
-                <RadioGroupItem value="medium" id="medium" />
+                <Link href={getNewSearchParams("projectSize", "MEDIUM")}>
+                  <RadioGroupItem value="medium" id="medium" />
+                </Link>
                 <Label htmlFor="medium"> Medium </Label>
               </li>
               <li className="flex items-center space-x-2">
-                <RadioGroupItem value="big" id="big" />
+                <Link href={getNewSearchParams("projectSize", "BIG")}>
+                  <RadioGroupItem value="big" id="big" />
+                </Link>
                 <Label htmlFor="big"> Big </Label>
               </li>
             </ul>
@@ -127,19 +147,35 @@ const GeneralFilter = () => {
           >
             <div className="space-y-1">
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="all-time" id="all-time" defaultChecked />
+                <Link href={getNewSearchParams("dateOfPosting", "all-time")}>
+                  <RadioGroupItem
+                    value="all-time"
+                    id="all-time"
+                    defaultChecked
+                  />
+                </Link>
                 <Label htmlFor="all-time">All time</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="last-24-hours" id="last-24-hours" />
+                <Link
+                  href={getNewSearchParams("dateOfPosting", "last-24-hours")}
+                >
+                  <RadioGroupItem value="last-24-hours" id="last-24-hours" />
+                </Link>
                 <Label htmlFor="last-24-hours">Last 24 hours</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="last-3-days" id="last-3-days" />
+                <Link
+                  href={getNewSearchParams("dateOfPosting", "last-3-hours")}
+                >
+                  <RadioGroupItem value="last-3-days" id="last-3-days" />
+                </Link>
                 <Label htmlFor="last-3-days">Last 3 days</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="last-7-days" id="last-7-days" />
+                <Link href={getNewSearchParams("dateOfPosting", "last-7-days")}>
+                  <RadioGroupItem value="last-7-days" id="last-7-days" />
+                </Link>
                 <Label htmlFor="last-7-days">Last 7 days</Label>
               </div>
             </div>
@@ -156,25 +192,35 @@ const GeneralFilter = () => {
           >
             <div className="space-y-1">
               <div className="flex items-center space-x-2">
-                <RadioGroupItem
-                  value="any-remuneration"
-                  id="any-remuneration"
-                  defaultChecked
-                />
-                <Label htmlFor="any-remuneration">Paid</Label>
+                <Link
+                  href={getNewSearchParams("remuneration", "any-remuneration")}
+                >
+                  <RadioGroupItem
+                    value="any-remuneration"
+                    id="any-remuneration"
+                    defaultChecked
+                  />
+                </Link>
+                <Label htmlFor="any-remuneration">Any</Label>
               </div>
 
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="paid" id="paid" />
+                <Link href={getNewSearchParams("remuneration", "paid")}>
+                  <RadioGroupItem value="paid" id="paid" />
+                </Link>
                 <Label htmlFor="paid">Paid</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="internship" id="internship" />
-                <Label htmlFor="internship">Volunteer</Label>
+                <Link href={getNewSearchParams("remuneration", "volunteer")}>
+                  <RadioGroupItem value="volunteer" id="volunteer" />
+                </Link>
+                <Label htmlFor="volunteer">Volunteer</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="work-remotely" id="work-remotely" />
-                <Label htmlFor="work-remotely">Stock</Label>
+                <Link href={getNewSearchParams("remuneration", "volunteer")}>
+                  <RadioGroupItem value="stock" id="stock" />
+                </Link>
+                <Label htmlFor="stock">Stock</Label>
               </div>
             </div>
           </RadioGroup>

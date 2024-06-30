@@ -1,4 +1,4 @@
-import { Heading } from "@/app/components";
+import { Heading, Paragraph } from "@/app/components";
 import { cn } from "@/lib/utils";
 import { Calendar, CircleDollarSign, MapPin, Timer } from "lucide-react";
 import Image from "next/image";
@@ -41,7 +41,7 @@ export const JobCard = ({
         alt={"Logo"}
       />
       <div>
-        <p className="mb-1 text-base text-black">{platform}</p>
+        <Paragraph className="mb-2">{platform}</Paragraph>
         <div className="flex items-center justify-start gap-3">
           <Heading>{title}</Heading>
           {isNew && (

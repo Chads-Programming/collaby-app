@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { NavBar } from "@/app/components";
 import { JobCard } from "@/app/(jobs)/components";
+import Hero from "./components/hero/hero";
 
 export default async function Home() {
   return (

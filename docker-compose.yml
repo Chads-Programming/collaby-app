@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  postgres_dev:
+    container_name: collaby_postgres_dev
+    image: postgres:14-alpine
+    ports:
+      - 6969:5432
+    volumes:
+      - /var/lib/collaby_dev_db:/data/
+    environment:
+      - POSTGRES_PASSWORD=dev_password
+      - POSTGRES_USER=dev_user
+      - POSTGRES_DB=collaby_dev_db

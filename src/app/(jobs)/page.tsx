@@ -1,13 +1,16 @@
 import Image from "next/image";
 import NavBar from "../components/common/nav-bar/nav-bar";
 import Hero from "./components/hero/hero";
+import { FiltersSidebar } from "./components/filters-sidebar/filters-sidebar";
 
-export default async function Home() {
+export default async function JobsPage() {
   return (
-    <main className="flex min-h-screen flex-col bg-gradient-to-b text-white">
+    <main className="flex min-h-screen flex-col bg-gradient-to-b text-white bg-muted">
       <NavBar />
-      <Hero />
-      {/* <Image src="/collaby-logo.svg" width={200} height={200} alt="logo" /> */}
+      <section>
+        <Hero />
+        <FiltersSidebar />
+      </section>
     </main>
   );
 }

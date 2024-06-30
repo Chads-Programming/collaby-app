@@ -1,6 +1,6 @@
 import { Heading, Paragraph, Tag } from "@/app/components";
 import { cn } from "@/lib/utils";
-import { Calendar, CircleDollarSign, MapPin, Timer } from "lucide-react";
+import { Calendar, CircleDollarSign, MapPin } from "lucide-react";
 import Image from "next/image";
 
 interface JobCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -45,9 +45,7 @@ export const JobCard = ({
         <Paragraph className="mb-2">{platform}</Paragraph>
         <div className="flex items-center justify-start gap-3">
           <Heading>{title}</Heading>
-          {isNew && (
-            <Tag>New post</Tag>
-          )}
+          {isNew && <Tag>New post</Tag>}
         </div>
         <div className="mt-2 flex  items-start gap-10">
           <Paragraph className="font-medium text-neutral-600">

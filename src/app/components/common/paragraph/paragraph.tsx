@@ -10,5 +10,5 @@ export const Paragraph = ({
   className,
   ...props
 }: ParagraphProps) => {
-  return <As className={cn("text-base text-black", className)} {...props} />;
+  return <As className={cn("text-sm md:text-base text-black", className)} {...props} />;
 };

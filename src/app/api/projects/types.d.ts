@@ -1,16 +1,15 @@
-export interface ParamsFilters {
-  size?: string;
-  date?: string;
-  remuneration?: string;
-  role?: string;
-}
+export type ParamsFilters = [Size, Remuneration, Role, Date];
+
+type Size = ["ANY", "SMALL", "MEDIUM", "BIG"];
+type Remuneration = ["PAID", "VOLUNTEER", "STOCK"];
+type Role = ["BACKEND", "FRONTEND", "FULLSTACK"];
 
 export interface BodyProject {
   id: string;
   title: string;
   logoUrl: string | null;
   description: string | null;
-  size: string | null;
-  remuneration: string | null;
-  role: string | null;
+  size: ["ANY", "SMALL", "MEDIUM", "BIG"];
+  remuneration: ["PAID", "VOLUNTEER", "STOCK"];
+  role: ["BACKEND", "FRONTEND", "FULLSTACK"];
 }

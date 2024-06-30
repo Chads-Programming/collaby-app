@@ -54,7 +54,7 @@ export const CreateProjectModal = () => {
           Make changes to your profile here. Click save when you re done.
         </SheetDescription>
       </SheetHeader>
-      <form id="project-create" onSubmit={handleSubmit(onSubmit)}>
+      <form id="project-create">
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="title" className="text-right">

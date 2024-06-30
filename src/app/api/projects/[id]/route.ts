@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { userMiddleware } from "../../_middlewares/auth.middleware";
 import { updateProjectHandler } from "../edit-project.route";
 import { getOneProjectHandler } from "../get-one-project.route";

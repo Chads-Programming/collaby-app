@@ -18,7 +18,7 @@ export const getAllProjectHandler: NextHandler = async (req: NextRequest) => {
       return {
         [param]: URLParamsQuery.get(param),
       };
-    }) as ParamsFilters;
+    }) as ParamsFilters[];
 
     const project = await getAllProjects(params);
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { NavBar } from "@/app/components";
 import { Hero, JobCard } from "@/app/(jobs)/components";
-import { FiltersSidebar } from "./components/filters-sidebar/filters-sidebar";
+import { Filter } from "./components/filters-sidebar/filters-sidebar";
 
 export default async function JobsPage() {
   return (
@@ -9,7 +9,7 @@ export default async function JobsPage() {
       <NavBar />
       <Hero />
       <section className="items-start justify-start gap-10 p-10 md:flex">
-        <FiltersSidebar />
+        <Filter />
         <div className="flex max-w-3xl flex-1 flex-col gap-5 py-10 md:py-0">
           {[1, 2, 3].map((_, i) => (
             <JobCard
@@ -28,7 +28,6 @@ export default async function JobsPage() {
           ))}
         </div>
       </section>
-
       {/* <Image src="/collaby-logo.svg" width={200} height={200} alt="logo" /> */}
     </main>
   );

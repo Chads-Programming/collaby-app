@@ -6,7 +6,7 @@
 
 
   :root {
-    --background: 218 100% 100%;
+    --background: 0 0% 98%;
     --foreground: 218 5% 10%;
     --card: 218 50% 100%;
     --card-foreground: 218 5% 15%;
@@ -23,7 +23,7 @@
     --destructive: 0 100% 50%;
     --destructive-foreground: 218 5% 100%;
     --border: 218 30% 82%;
-    --input: 218 30% 50%;
+    --input: 0 0% 93%;
     --ring: 218 76% 54.3%;
     --radius: .375rem;
   }

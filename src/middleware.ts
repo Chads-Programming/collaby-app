@@ -3,7 +3,7 @@ import { prisma } from "./lib/prisma";
 import { NextRequest } from "next/server";
 import NodeCache from "node-cache";
 import { env } from "./env";
-import { unsafe_clerk_user } from "./types/clerk-user.type";
+import { type unsafe_clerk_user } from "./types/clerk-user.type";
 
 const cache = new NodeCache({
   stdTTL: 600,

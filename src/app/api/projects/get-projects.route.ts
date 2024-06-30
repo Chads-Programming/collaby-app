@@ -1,5 +1,5 @@
 import getProjects from "@/server/projects/get-projects"
-import { NextHandler } from "@/types"
+import { type NextHandler } from "@/types"
 import { currentUser } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 

@@ -17,8 +17,8 @@ import {
 const NavbarLinks = () => (
   <>
     {NAVBAR_ITEMS.map((item) => (
-      <li className="text-black">
-        <Button variant="ghost"asChild>
+      <li className="text-black" key={item.label}>
+        <Button variant="ghost" asChild>
           <Link className="flex gap-4" href={item.href}>
             <item.icon />
             {item.label}
@@ -32,41 +32,37 @@ const NavbarLinks = () => (
 export const NavBar = async () => {
   const { userId } = auth();
   return (
-    <nav className="flex w-full bg-white px-3 py-2 md:px-8 shadow md:shadow-md border-b">
-      <ul className="w-full gap-4 hidden md:flex md:items-center">
+    <nav className="flex w-full border-b bg-white px-3 py-2 shadow md:px-8 md:shadow-md">
+      <ul className="hidden w-full gap-4 md:flex md:items-center">
         <Link href="/">
-          <span className="text-primary text-2xl font-semibold">Collably</span>
+          <span className="text-2xl font-semibold text-primary">Collably</span>
         </Link>
         <div className="flex-1" />
         <NavbarLinks />
         <div className="flex-1" />
-        {
-          !userId ? <li>
+        {!userId ? (
+          <li>
             <SignInButton>
-              <Button>
-                Log In
-              </Button>
+              <Button>Log In</Button>
             </SignInButton>
           </li>
-            : <SignOutButton>
-              <Button>
-                Sign Out
-              </Button>
-            </SignOutButton>
-
-        }
+        ) : (
+          <SignOutButton>
+            <Button>Sign Out</Button>
+          </SignOutButton>
+        )}
       </ul>
-      <div className="flex w-full justify-between items-center md:hidden">
-        <span className="text-primary text-2xl font-semibold">Collably</span>
+      <div className="flex w-full items-center justify-between md:hidden">
+        <span className="text-2xl font-semibold text-primary">Collably</span>
         <Sheet>
           <SheetTrigger asChild>
             <Button size="icon" className="justify-center md:hidden">
               <List className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent className="h-full w-10/12 flex flex-col md:hidden">
+          <SheetContent className="flex h-full w-10/12 flex-col md:hidden">
             <SheetHeader>
-              <span className="text-primary text-2xl font-semibold">
+              <span className="text-2xl font-semibold text-primary">
                 Collably
               </span>
               {/* <SheetClose> */}
@@ -94,4 +90,4 @@ export const NavBar = async () => {
       </div>
     </nav>
   );
-}
+};

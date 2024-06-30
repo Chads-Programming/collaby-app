@@ -9,41 +9,41 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Infer } from "@/globals";
+import type { Infer } from "@/globals";
 import React from "react";
 import { useForm } from "react-hook-form";
-import useSWRMutation from "swr/mutation"
-import { CreateProjectDto } from '@/server/projects/dtos/create-project.dto'
-import { zodResolver } from '@hookform/resolvers/zod'
-async function createProject(url: string, { arg }: { arg: Infer<typeof CreateProjectDto> }) {
+import useSWRMutation from "swr/mutation";
+import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
+import { zodResolver } from "@hookform/resolvers/zod";
+async function createProject(
+  url: string,
+  { arg }: { arg: Infer<typeof CreateProjectDto> },
+) {
   return await fetch(url, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify(arg),
-    credentials: 'include',
+    credentials: "include",
     headers: {
-      "Content-Type": "application/json"
-    }
-  })
+      "Content-Type": "application/json",
+    },
+  });
 }
 
 export const CreateProjectModal = () => {
-  const {
-    register,
-    handleSubmit
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: {
-      title: '',
-      description: ''
+      title: "",
+      description: "",
     },
-    resolver: zodResolver(CreateProjectDto)
-  })
-  const { trigger } = useSWRMutation('/api/projects', createProject)
+    resolver: zodResolver(CreateProjectDto),
+  });
+  const { trigger } = useSWRMutation("/api/projects", createProject);
   async function onSubmit(data: Infer<typeof CreateProjectDto>) {
     try {
-      const res = await trigger(data)
-      console.log({ res })
+      const res = await trigger(data);
+      console.log({ res });
     } catch (error) {
-      console.error({ error })
+      console.error({ error });
     }
   }
   return (
@@ -51,7 +51,7 @@ export const CreateProjectModal = () => {
       <SheetHeader>
         <SheetTitle>Create project</SheetTitle>
         <SheetDescription>
-          Make changes to your profile here. Click save when you're done.
+          Make changes to your profile here. Click save when you re done.
         </SheetDescription>
       </SheetHeader>
       <form id="project-create" onSubmit={handleSubmit(onSubmit)}>
@@ -60,19 +60,31 @@ export const CreateProjectModal = () => {
             <Label htmlFor="title" className="text-right">
               Title
             </Label>
-            <Input {...register('title')} id="title" placeholder="Project Title" className="col-span-3" />
+            <Input
+              {...register("title")}
+              id="title"
+              placeholder="Project Title"
+              className="col-span-3"
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="description" className="text-right">
               Description
             </Label>
-            <Input {...register('description')} id="description" placeholder="Project Description" className="col-span-3" />
+            <Input
+              {...register("description")}
+              id="description"
+              placeholder="Project Description"
+              className="col-span-3"
+            />
           </div>
         </div>
       </form>
       <SheetFooter>
-        <Button form="project-create" type="submit">Create</Button>
+        <Button form="project-create" type="submit">
+          Create
+        </Button>
       </SheetFooter>
-    </SheetContent >
+    </SheetContent>
   );
 };

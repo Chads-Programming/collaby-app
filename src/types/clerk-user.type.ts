@@ -14,11 +14,15 @@ export interface unsafe_clerk_user {
   totp_enabled: boolean;
   backup_code_enabled: boolean;
   email_addresses: EmailAddress[];
-  phone_numbers: any[];
-  web3_wallets: any[];
-  passkeys: any[];
+  //antes eran any
+  phone_numbers: string[];
+  //antes eran any
+  web3_wallets: string[];
+  //antes eran any
+  passkeys: string[];
   external_accounts: ExternalAccount[];
-  saml_accounts: any[];
+  //antes eran any
+  saml_accounts: string[];
   public_metadata: Metadata;
   private_metadata: Metadata;
   unsafe_metadata: Metadata;
@@ -82,4 +86,5 @@ interface ExternalAccount {
 }
 
 interface Metadata {
+  data: string;
 }

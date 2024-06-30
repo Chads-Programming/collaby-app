@@ -1,20 +1,9 @@
 import { NextApiHandler } from "next";
 import { NextResponse } from "next/server";
-import { UpdateProjectDto } from "../../../server/projects/dtos/update-project.dto";
-import updateProject from "@/server/projects/edit-project";
 import getOneProject from "@/server/projects/get-one-project";
 
-export const getOneProjectHandler: NextApiHandler = async (
-  _req,
-  {
-    params,
-  }: {
-    params: { id: string };
-  },
-) => {
+export const getOneProjectHandler: NextApiHandler = async (req) => {
   try {
-    const id = params.id;
-
     const update = await getOneProject(id);
 
     return NextResponse.json({

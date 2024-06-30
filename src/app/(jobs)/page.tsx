@@ -1,11 +1,16 @@
 import Image from "next/image";
 import { NavBar } from "@/app/components";
 import { Hero, JobCard } from "@/app/(jobs)/components";
+import { FiltersSidebar } from "./components/filters-sidebar/filters-sidebar";
 
-export default async function Home() {
+export default async function JobsPage() {
   return (
-    <main className="flex min-h-screen flex-col bg-gradient-to-b text-white">
+    <main className="flex min-h-screen flex-col bg-gradient-to-b text-white bg-muted">
       <NavBar />
+      <section>
+        <Hero />
+        <FiltersSidebar />
+      </section>
       <Hero />
 
       <JobCard

@@ -31,7 +31,7 @@ const NavbarLinks = () => (
 export const NavBar = async () => {
   const { userId } = auth();
   return (
-    <nav className="flex w-full bg-white px-3 py-2 md:px-8 shadow md:shadow-md">
+    <nav className="flex w-full bg-white px-3 py-2 md:px-8 shadow md:shadow-md border-b">
       <ul className="w-full gap-4 hidden md:flex md:items-center">
         <li>
           <span className="text-primary text-2xl font-semibold">Collably</span>

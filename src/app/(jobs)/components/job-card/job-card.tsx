@@ -29,7 +29,7 @@ export const JobCard = ({
   return (
     <div
       className={cn(
-        "max-w-3xl items-start justify-start gap-5 bg-white p-5 shadow md:flex",
+        "items-start justify-start gap-5 bg-white p-5 shadow md:flex",
         className,
       )}
       {...props}

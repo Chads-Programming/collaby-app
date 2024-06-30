@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export function FiltersSidebar() {
   return (
-    <div className="flex w-full mt-2 md:max-w-xs">
+    <div className="flex md:flex-col w-full gap-2 md:max-w-[200px]">
       <Sheet>
         <SheetTrigger className="w-full flex items-center" asChild>
           <Button variant="outline">

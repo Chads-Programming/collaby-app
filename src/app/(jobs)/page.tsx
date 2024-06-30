@@ -8,12 +8,12 @@ export default async function JobsPage() {
     <main className="flex min-h-screen flex-col bg-muted bg-gradient-to-b text-white">
       <NavBar />
       <Hero />
-      <section className="p-10 md:flex justify-start items-start gap-10">
+      <section className="items-start justify-start gap-10 p-10 md:flex">
         <FiltersSidebar />
-        <div className="py-10 md:py-0 flex flex-col gap-5">
-          {[1,2,3].map((_, i) => (
+        <div className="flex max-w-3xl flex-1 flex-col gap-5 py-10 md:py-0">
+          {[1, 2, 3].map((_, i) => (
             <JobCard
-              key={i+i}
+              key={i + i}
               logo="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png"
               platform="Notion"
               title="Software Engineer"

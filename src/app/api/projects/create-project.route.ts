@@ -1,6 +1,6 @@
 import createProject from "@/server/projects/create-project";
 import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
-import { NextApiHandler } from "next";
+import { type NextApiHandler } from "next";
 import { NextResponse } from "next/server";
 
 export const createProjectHandler: NextApiHandler = async (req) => {

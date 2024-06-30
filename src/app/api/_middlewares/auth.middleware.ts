@@ -1,5 +1,5 @@
 import { getAuth } from "@clerk/nextjs/server";
-import { NextApiHandler } from "next";
+import { type NextApiHandler } from "next";
 import { NextResponse } from "next/server";
 
 export const userMiddleware =

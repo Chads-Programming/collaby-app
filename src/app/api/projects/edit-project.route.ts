@@ -1,4 +1,4 @@
-import { NextApiHandler } from "next";
+import { type NextApiHandler } from "next";
 import { NextResponse } from "next/server";
 import { UpdateProjectDto } from "../../../server/projects/dtos/update-project.dto";
 import updateProject from "@/server/projects/edit-project";

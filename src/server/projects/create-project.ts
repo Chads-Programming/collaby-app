@@ -1,4 +1,4 @@
-import { CreateProjectDto } from "./dtos/create-project.dto";
+import { type CreateProjectDto } from "./dtos/create-project.dto";
 import type { Infer } from "@/globals";
 import { prisma } from "@/lib/prisma";
 

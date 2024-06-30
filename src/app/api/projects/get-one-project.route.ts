@@ -1,4 +1,4 @@
-import { NextApiHandler } from "next";
+import { type NextApiHandler } from "next";
 import { NextResponse } from "next/server";
 import getOneProject from "@/server/projects/get-one-project";
 

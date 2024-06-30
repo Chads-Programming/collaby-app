@@ -45,8 +45,8 @@ export default async function NavBar() {
           <li>Sign Up</li>
         </Button>
       </ul>
-      <div>
-        {" "}
+      <div className="flex w-full justify-between items-center">
+        <span className="text-primary text-2xl font-semibold">Collably</span>
         <Sheet>
           <SheetTrigger asChild>
             <Button size="icon" className="justify-center md:hidden">
@@ -58,7 +58,6 @@ export default async function NavBar() {
               <span className="text-primary text-2xl font-semibold">
                 Collably
               </span>
-
               {/* <SheetClose> */}
               {/*   <X /> */}
               {/* </SheetClose> */}
@@ -81,7 +80,6 @@ export default async function NavBar() {
             </SheetFooter>
           </SheetContent>
         </Sheet>
-        <span className="text-primary text-2xl font-semibold">Collably</span>
       </div>
     </nav>
   );

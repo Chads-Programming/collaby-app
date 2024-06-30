@@ -1,8 +1,8 @@
-import { type NextApiHandler } from "next";
 import { NextResponse } from "next/server";
 import getOneProject from "@/server/projects/get-one-project";
+import { NextHandler } from "@/types";
 
-export const getOneProjectHandler: NextApiHandler = async (
+export const getOneProjectHandler: NextHandler = async (
   _req,
   {
     params,

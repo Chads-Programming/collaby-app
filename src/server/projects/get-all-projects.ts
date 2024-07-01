@@ -1,12 +1,26 @@
 import { prisma } from "@/lib/prisma";
-import type { ParamsFilters } from "@/app/api/projects/types";
+import { Infer } from "@/globals";
+import { ProjectFiltersDto } from "@/app/api/projects/me/dtos/project-filter.dto";
 
-export default async function getAllProjects() {
-  try {
-    const projects = await prisma.projects.findMany();
+export default async function getAllProjects({
+	size,
+	role,
+	remuneration,
+	page,
+	count,
+}: Infer<typeof ProjectFiltersDto>) {
+	try {
+		const projects = await prisma.projects.findMany({
+			where: {
+				size: size || undefined,
+			},
+			take: count,
+			skip: (count ?? 10) * (page ?? 0),
+		});
 
-    return projects;
-  } catch (error) {
-    console.log("testing");
-  }
+		console.log("executed");
+		return projects;
+	} catch (error) {
+		console.log("testing");
+	}
 }

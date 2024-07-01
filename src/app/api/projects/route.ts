@@ -1,15 +1,11 @@
-import { getAllProjectHandler } from "./get-projects.route";
-import { zodMiddleware } from "../_middlewares/zod.middleware";
 import { bodyParserMiddleware } from "../_middlewares/body-parser.middleware";
-import { ProjectFiltersDto } from "./dtos/project-filter.dto";
-import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
-import { userMiddleware } from "../_middlewares/auth.middleware";
-import { createProjectHandler } from "./create-project.route";
+import { zodMiddleware } from "../_middlewares/zod.middleware";
+import { getAllProjectHandler } from "./get-all-projects.route";
+import { ProjectFiltersDto } from "./me/dtos/project-filter.dto";
 
-export const POST = bodyParserMiddleware(userMiddleware(zodMiddleware(createProjectHandler, {
-  body: CreateProjectDto
-})));
-
-export const GET = bodyParserMiddleware(zodMiddleware(getAllProjectHandler, {
-  search: ProjectFiltersDto
-}));
+export const dynamic = "force-dynamic";
+export const GET = bodyParserMiddleware(
+	zodMiddleware(getAllProjectHandler, {
+		search: ProjectFiltersDto,
+	}),
+);

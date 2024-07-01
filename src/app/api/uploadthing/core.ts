@@ -1,9 +1,10 @@
+import { currentUser } from "@clerk/nextjs/server";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
 const f = createUploadthing();
 
-const auth = async (req: Request) => ({ id: "fakeId" }); // Fake auth function
+const auth = async (req: Request) => await currentUser(); // Fake auth function
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
@@ -14,6 +15,7 @@ export const ourFileRouter = {
       // This code runs on your server before upload
       const user = await auth(req);
 
+      console.log({ user })
       // If you throw, the user will not be able to upload
       if (!user) throw new UploadThingError("Unauthorized");
 

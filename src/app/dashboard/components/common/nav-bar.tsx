@@ -32,6 +32,7 @@ export default function Navbar() {
         routes.map(({ icon: Icon, label, url }) => (
           <Link
             href={url}
+            key={url}
             className={cn("flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
               pathname === url && "bg-muted text-primary")}
           >

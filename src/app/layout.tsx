@@ -10,7 +10,8 @@ import {
   ClerkProvider
 } from '@clerk/nextjs'
 import { ModalContainer } from "./shared/components/modal-container";
-
+import { NavBar } from "@/app/components";
+import { Toaster } from 'sonner'
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -45,7 +46,9 @@ export default function RootLayout({
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
           <ModalContainer />
+          <NavBar />
           {children}
+          <Toaster richColors />
         </ClerkProvider>
       </body>
     </html>

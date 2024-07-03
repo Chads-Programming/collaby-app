@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-interface TagProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+type TagProps = React.HTMLAttributes<HTMLParagraphElement>
 
 export const Tag = ({ className, ...props }: TagProps) => {
   return (

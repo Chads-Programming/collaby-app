@@ -2,11 +2,13 @@ import { Heading, Paragraph, Tag } from "@/app/components";
 import { cn } from "@/lib/utils";
 import { Calendar, CircleDollarSign, MapPin } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface JobCardProps extends React.HTMLAttributes<HTMLDivElement> {
   logo: string;
   platform: string;
   title: string;
+  slug: string;
   location: string;
   budget: string;
   description: string;
@@ -18,6 +20,7 @@ export const JobCard = ({
   logo,
   platform,
   title,
+  slug,
   location,
   budget,
   description,
@@ -35,13 +38,15 @@ export const JobCard = ({
       {...props}
     >
       <div className="mb-5 flex items-center justify-start gap-2 md:mb-0 md:block">
-        <Image
-          src={logo}
-          width={100}
-          height={100}
-          className="w-10 md:w-24"
-          alt={"Logo"}
-        />
+        {/* <Image */}
+        {/*   src={logo} */}
+        {/*   width={100} */}
+        {/*   height={100} */}
+        {/*   className="w-10 md:w-24" */}
+        {/*   alt={"Logo"} */}
+        {/* /> */}
+
+        <img src={logo} className="w-10 md:w-24" alt={"Logo"} />
         <Paragraph className="text-lg font-medium md:hidden">
           {platform}
         </Paragraph>
@@ -51,7 +56,9 @@ export const JobCard = ({
           {platform}
         </Paragraph>
         <div className="flex flex-col flex-wrap items-start justify-center gap-3 md:flex-row md:items-center md:justify-start">
-          <Heading className="md:order-0 order-1">{title}</Heading>
+          <Link href={`/project/${slug}`} className="md:order-0 order-1">
+            <Heading>{title}</Heading>
+          </Link>
           {isNew && <Tag className="order-0 md:order-1">New post</Tag>}
         </div>
         <div className="mt-2 flex flex-wrap items-start gap-5 md:gap-10">

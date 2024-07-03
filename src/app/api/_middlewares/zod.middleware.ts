@@ -36,7 +36,6 @@ export const zodMiddleware = (handler: NextHandler, schema: IZodSchemas): NextHa
   return handler(req, { params });
 };
 
-
 function validateSchemaType(schema: Schema, value: unknown) {
   schema.parse(value)
 }

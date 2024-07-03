@@ -11,16 +11,23 @@ import {
 } from "@/components/ui/sheet";
 import type { Infer } from "@/globals";
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
 import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { toast } from "sonner";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Uploader } from "@/app/components/common/uploader";
-import { MultiSelect } from "@/components/ui/multi-select";
-import { TECHNOLOGIES } from "@/lib/constants";
+import { LinkInputList } from "./link-input-list";
 
 async function createProject(
   url: string,
@@ -40,21 +47,21 @@ export const CreateProjectModal = () => {
   const form = useForm<Infer<typeof CreateProjectDto>>({
     defaultValues: {
       description: "",
-      title: '',
-      role: 'FULLSTACK',
-      size: 'ANY',
-      logoUrl: 'https://placehold.co/200x200',
-      remuneration: 'VOLUNTEER'
+      title: "",
+      role: "FULLSTACK",
+      size: "ANY",
+      logoUrl: "https://placehold.co/200x200",
+      remuneration: "VOLUNTEER",
     },
     resolver: zodResolver(CreateProjectDto),
   });
-  const { register, handleSubmit, watch, setValue, control } = form
+  const { register, handleSubmit, watch, setValue, control } = form;
   const projectImage = watch("logoUrl");
 
   const { trigger } = useSWRMutation("/api/projects", createProject);
   async function onSubmit(data: Infer<typeof CreateProjectDto>) {
     try {
-      console.log({ data })
+      console.log({ data });
       // const res = await trigger(data);
       // console.log({ res });
     } catch (error) {
@@ -80,7 +87,7 @@ export const CreateProjectModal = () => {
                   <Label htmlFor="description" className="text-right">
                     Logo
                   </Label>
-                  <FormControl >
+                  <FormControl>
                     <Uploader
                       className="col-span-3"
                       onClientUploadComplete={(res: { url: string }[]) => {
@@ -95,13 +102,13 @@ export const CreateProjectModal = () => {
                         });
                       }}
                     >
-                      <Avatar className="flex justify-center items-center cursor-pointer w-24 h-24">
+                      <Avatar className="flex h-24 w-24 cursor-pointer items-center justify-center">
                         <AvatarImage
                           src={projectImage}
-                          alt={'Project Image'}
+                          alt={"Project Image"}
                           width={20}
                           height={20}
-                          className="w-24 h-24 object-cover object-center"
+                          className="h-24 w-24 object-cover object-center"
                         />
                       </Avatar>
                     </Uploader>
@@ -110,43 +117,54 @@ export const CreateProjectModal = () => {
               )}
             />
 
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="title" className="text-right">
-                Title
-              </Label>
-              <Input
-                {...register("title")}
-                id="title"
-                placeholder="Project Title"
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="description" className="text-right">
-                Description
-              </Label>
-              <Input
-                {...register("description")}
-                id="description"
-                placeholder="Project Description"
-                className="col-span-3"
-              />
-            </div>
+            <FormField
+              control={control}
+              name="title"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Username</FormLabel>
+                    <FormControl className="col-span-3">
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
+            <FormField
+              control={control}
+              name="description"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Description</FormLabel>
+                    <FormControl className="col-span-3">
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex w-full flex-col items-start gap-2">
+            <span className="mb-2 text-right text-sm font-medium">
+              Project links:
+            </span>
+            <LinkInputList />
           </div>
         </form>
-
       </Form>
       <SheetFooter>
-        <Button form="project-create" type="submit">
+        <Button form="project-create" type="submit" className="mt-2">
           Create
         </Button>
       </SheetFooter>
-    </SheetContent >
+    </SheetContent>
   );
 };
-
-
 
 /* tags multiselect
 // {

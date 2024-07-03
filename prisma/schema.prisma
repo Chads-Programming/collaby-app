@@ -2,115 +2,124 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id                   String                @id @default(cuid())
-    name                 String?
-    email                String?               @unique
-    emailVerified        DateTime?
-    image                String?
-    oauthId              String                @unique
-    projects             Projects[]
-    projectCollaborators ProjectCollaborator[]
+  id                   String                @id @default(cuid())
+  name                 String?
+  email                String?               @unique
+  emailVerified        DateTime?
+  image                String?
+  oauthId              String                @unique
+  projects             Projects[]
+  projectCollaborators ProjectCollaborator[]
 }
 
 model Projects {
-    id          String   @id @default(uuid())
-    title       String
-    logoUrl     String?
-    description String?
-    size        Size?
-    remuneration Remuneration?
-    role        Role?
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-    User        User?    @relation(fields: [createdById], references: [id])
-    createdById String?
+  id           String        @id @default(uuid())
+  title        String
+  logoUrl      String?
+  description  String?
+  size         Size?
+  remuneration Remuneration?
+  role         Role?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  User         User?         @relation(fields: [createdById], references: [id])
+  createdById  String?
 
-    links         ProjectLink[]
-    tags          ProjectTags[]
-    projectRoles  ProjectRole[]
-    collaborators ProjectCollaborator[]
+  links         ProjectLink[]
+  tags          ProjectTags[]
+  projectRoles  ProjectRole[]
+  collaborators ProjectCollaborator[]
 
-    @@index([title])
+  @@index([title])
 }
 
 enum Size {
-    ANY
-    SMALL
-    MEDIUM
-    BIG
+  ANY
+  SMALL
+  MEDIUM
+  BIG
 }
 
 enum Remuneration {
-    PAID
-    VOLUNTEER
-    STOCK
+  PAID
+  VOLUNTEER
+  STOCK
 }
 
 enum Role {
-    BACKEND
-    FRONTEND
-    FULLSTACK
+  BACKEND
+  FRONTEND
+  FULLSTACK
+}
+
+enum LinkType {
+  GITHUB
+  GITLAB
+  LINKEDIN
+  FACEBOOK
+  INSTAGRAM
+  YOUTUBE
+  OTHER
 }
 
 model ProjectCollaborator {
-    id Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-    project   Projects @relation(fields: [projectId], references: [id])
-    projectId String
+  project   Projects @relation(fields: [projectId], references: [id])
+  projectId String
 
-    user   User   @relation(fields: [userId], references: [id])
-    userId String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 
-    @@unique([projectId, userId])
+  @@unique([projectId, userId])
 }
 
 model Roles {
-    id           Int           @id @default(autoincrement())
-    name         String        @unique
-    projectRoles ProjectRole[]
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  projectRoles ProjectRole[]
 }
 
 model ProjectRole {
-    id Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-    project   Projects @relation(fields: [projectId], references: [id])
-    projectId String
-    role      Roles    @relation(fields: [roleId], references: [id])
-    roleId    Int
+  project   Projects @relation(fields: [projectId], references: [id])
+  projectId String
+  role      Roles    @relation(fields: [roleId], references: [id])
+  roleId    Int
 
-    @@unique([projectId, roleId])
+  @@unique([projectId, roleId])
 }
 
 model Tags {
-    id          Int           @id @default(autoincrement())
-    name        String        @unique
-    projectTags ProjectTags[]
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  projectTags ProjectTags[]
 }
 
 model ProjectTags {
-    id        Int      @id @default(autoincrement())
-    project   Projects @relation(fields: [projectId], references: [id])
-    projectId String
-    tags      Tags     @relation(fields: [tagId], references: [id])
-    tagId     Int
+  id        Int      @id @default(autoincrement())
+  project   Projects @relation(fields: [projectId], references: [id])
+  projectId String
+  tags      Tags     @relation(fields: [tagId], references: [id])
+  tagId     Int
 
-    @@unique([projectId, tagId])
+  @@unique([projectId, tagId])
 }
 
 model ProjectLink {
-    id         Int       @id @default(autoincrement())
-    iconUrl    String
-    text       String
-    value      String
-    Projects   Projects? @relation(fields: [projectsId], references: [id])
-    projectsId String?
+  id         Int       @id @default(autoincrement())
+  type       LinkType
+  url        String
+  Projects   Projects? @relation(fields: [projectsId], references: [id])
+  projectsId String?
 }

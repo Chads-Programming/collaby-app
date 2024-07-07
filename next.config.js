@@ -12,6 +12,26 @@ const config = {
         protocol: "https",
         hostname: "upload.wikimedia.org",
       },
+      {
+        protocol: "https",
+        hostname: "images-platform.99static.com", // uploadthing
+      },
+      {
+        protocol: 'https',
+        hostname: "*ipfs.com" // uploadthing
+      },
+      {
+        protocol: 'https',
+        hostname: "*utfs.io" // uploadthing
+      },
+      {
+        protocol: "https",
+        hostname: "*githubusercontent.com", // avatar
+      },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      }
     ],
   },
 };

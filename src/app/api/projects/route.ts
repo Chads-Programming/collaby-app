@@ -15,11 +15,9 @@ import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
 
 export const dynamic = "force-dynamic";
 
-export const GET = bodyParserMiddleware(
-  zodMiddleware(getAllProjectHandler, {
+export const GET = zodMiddleware(getAllProjectHandler, {
     search: ProjectFiltersDto,
-  }),
-);
+  })
 
 export const POST = withMiddleware(
   [
@@ -37,3 +35,4 @@ export const POST = withMiddleware(
     });
   },
 );
+

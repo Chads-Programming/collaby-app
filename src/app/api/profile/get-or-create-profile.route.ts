@@ -1,8 +1,7 @@
-import { prisma } from "@/lib/prisma"
 import findOrCreateProfile from "@/server/profile/find-or-create-profile";
 import { NextHandler } from "@/types"
 import { currentUser, User } from "@clerk/nextjs/server"
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 
 const getOrCreateProfileHandler: NextHandler = async () => {
   try {

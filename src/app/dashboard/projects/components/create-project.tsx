@@ -51,7 +51,7 @@ export const CreateProjectModal = () => {
       title: "Chad god",
       role: "FULLSTACK",
       size: "ANY",
-      logoUrl: "https://placehold.co/200x200",
+      logoUrl: "https://placehold.co/300x300.png?text=No+Image",
       remuneration: "VOLUNTEER",
     },
     resolver: zodResolver(CreateProjectDto),

@@ -2,25 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 
 export type MiddlewareFunction = (
   req: NextRequest,
+  params: any
 ) => Promise<NextResponse<any>> | NextResponse<any>;
 
 export const withMiddleware =
   (
     middlewares: MiddlewareFunction[],
-    handler: (req: NextRequest) => Promise<any> | void | NextResponse<any>,
+    handler: (req: NextRequest, params?: any) => void | Response | Promise<void | Response>,
   ) =>
-  async (req: NextRequest) => {
-    if (!middlewares.length) {
-      return handler(req);
-    }
-
-    for (const middleware of middlewares) {
-      const response = await middleware(req);
-
-      if (response.status > 299) {
-        return response;
+    async (req: NextRequest, params?: any) => {
+      if (!middlewares.length) {
+        return handler(req, params);
       }
-    }
 
-    return handler(req);
-  };
+      for (const middleware of middlewares) {
+        const response = await middleware(req, params);
+
+        if (response.status > 299) {
+          return response;
+        }
+      }
+
+      return handler(req, params);
+    };

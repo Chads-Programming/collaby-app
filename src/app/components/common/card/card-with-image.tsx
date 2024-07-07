@@ -28,7 +28,7 @@ interface CardProps extends ICardBody {
   className?: string
 }
 
-export const CardWithImage = ({ children, imageUrl = "https://placehold.co/800x1000.png", className, ...card }: CardProps) => {
+export const CardWithImage = ({ children, imageUrl = "https://placehold.co/300x300.png?text=No+Image", className, ...card }: CardProps) => {
   return (
     <div className={cn("rounded-xl dark:bg-zinc-950 bg-zinc-50 overflow-hidden p-2 border pb-3 h-fit", className)}>
       <div className="relative aspect-video">

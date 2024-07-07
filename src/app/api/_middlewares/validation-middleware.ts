@@ -33,6 +33,7 @@ const validateSchema = <T extends ZodRawShape>(
 
 type CommonValidationFunction = (
   req: NextRequest,
+  params: any
 ) => Promise<boolean> | boolean;
 
 interface Options {
@@ -59,22 +60,21 @@ export const zodBody =
 
 // generic zod validator pipe for validate paths from url
 export const zodParams =
-  (path: string, schema: z.ZodType) => (req: NextApiRequest) => {
-    const pathValue = req.query[path]?.toString();
-
-    return validateSchema(pathValue, schema);
+  (path: string, schema: z.ZodType) => (req: NextRequest, params: any) => {
+    console.log('zodParams', { params })
+    return validateSchema(params, schema);
   };
 
 // generic zod validator pipe for validate query string params
 export const zodQuery =
-  (schema: z.ZodObject<ZodRawShape>) => (req: NextApiRequest) => {
+  (schema: z.ZodObject<ZodRawShape>) => (req: NextRequest) => {
     const object = Object.fromEntries(new URL(req.url as string).searchParams);
 
     return validateSchema(object, schema);
   };
 
 export const useValidationMiddleware =
-  (options: Options) => async (req: NextRequest) => {
+  (options: Options) => async (req: NextRequest, reqParams: any) => {
     const { body, params, query } = options;
 
     const validations = [params, body, query].filter((val) =>
@@ -82,7 +82,7 @@ export const useValidationMiddleware =
     ) as CommonValidationFunction[];
 
     const results = await Promise.allSettled(
-      validations.map((validate) => validate(req)),
+      validations.map((validate) => validate(req, reqParams)),
     );
 
     const errors = results.filter((result) => result.status === "rejected");

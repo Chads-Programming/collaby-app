@@ -10,9 +10,10 @@ interface UploaderProps {
   onUploadError: (error: Error) => void;
   children: React.ReactNode;
   className: string;
+  isUploadingText?: boolean;
 }
 
-export default function Uploader({ onClientUploadComplete, onUploadError, children, className }: UploaderProps) {
+export default function Uploader({ onClientUploadComplete, onUploadError, children, className, isUploadingText = true }: UploaderProps) {
   const { startUpload, isUploading } = useUploadThing("imageUploader", {
     onClientUploadComplete,
     onUploadError
@@ -20,7 +21,11 @@ export default function Uploader({ onClientUploadComplete, onUploadError, childr
 
   return (
     <>
-      <label htmlFor="file-upload" className={cn(isUploading && 'animate-pulse', "flex justify-center", className)}>{children}</label>
+      <label htmlFor="file-upload" className={cn(isUploading && 'animate-pulse', "flex justify-center flex-col items-center", className)}>
+        {children}
+
+        {isUploading && isUploadingText && <span>Uploading...</span>}
+      </label>
       <input
         id="file-upload"
         accept="image/*"

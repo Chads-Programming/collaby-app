@@ -62,3 +62,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.animate-spin{
+  animation-duration: 1.5s;
+}

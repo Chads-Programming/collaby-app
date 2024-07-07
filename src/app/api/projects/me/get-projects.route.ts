@@ -9,7 +9,7 @@ export const getAllProjectHandler: NextHandler = async (req: NextRequest) => {
 		const objParams = Object.fromEntries(searchParams.entries());
 
 		const params = ProjectFiltersDto.parse(objParams);
-		const project = await getAllProjects();
+		const project = await getAllProjects(params)
 
 		return NextResponse.json({
 			message: "Project find by id",

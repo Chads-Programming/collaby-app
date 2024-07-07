@@ -23,6 +23,7 @@ import type { Infer } from "@/globals";
 import Instagram from "@/app/shared/icons/instagram";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { cn } from "@/lib/utils";
+import WebIcon from "@/app/shared/icons/web";
 
 type FormData = Infer<typeof CreateProjectDto>;
 interface LinkTypeEntry {
@@ -40,7 +41,7 @@ const ICONS = {
   [LinkType.YOUTUBE]: <YouTube />,
   [LinkType.LINKEDIN]: <Linkedin />,
   [LinkType.INSTAGRAM]: <Instagram />,
-  [LinkType.OTHER]: <Globe />,
+  [LinkType.OTHER]: <WebIcon />,
 } as const;
 
 export const LinkInputList = () => {

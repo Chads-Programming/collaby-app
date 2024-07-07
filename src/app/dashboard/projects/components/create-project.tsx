@@ -28,6 +28,7 @@ import { toast } from "sonner";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Uploader } from "@/app/components/common/uploader";
 import { LinkInputList } from "./link-input-list";
+import { useSWRConfig } from "swr";
 
 async function createProject(
   url: string,
@@ -46,8 +47,8 @@ async function createProject(
 export const CreateProjectModal = () => {
   const form = useForm<Infer<typeof CreateProjectDto>>({
     defaultValues: {
-      description: "",
-      title: "",
+      description: "Chad buenardop",
+      title: "Chad god",
       role: "FULLSTACK",
       size: "ANY",
       logoUrl: "https://placehold.co/200x200",
@@ -55,17 +56,19 @@ export const CreateProjectModal = () => {
     },
     resolver: zodResolver(CreateProjectDto),
   });
-  const { register, handleSubmit, watch, setValue, control } = form;
+  const { handleSubmit, watch, setValue, control } = form;
+  const { mutate } = useSWRConfig();
   const projectImage = watch("logoUrl");
 
-  const { trigger } = useSWRMutation("/api/projects", createProject);
+  const { trigger } = useSWRMutation("/api/projects/me", createProject);
   async function onSubmit(data: Infer<typeof CreateProjectDto>) {
     try {
-      console.log({ data });
-      // const res = await trigger(data);
-      // console.log({ res });
+      const res = await trigger(data, {});
+      mutate(key => typeof key === 'string' && key.startsWith('/api/projects/me'))
+      toast.success("New project created successfully")
     } catch (error) {
       console.error({ error });
+      toast.error("Error while creating new project")
     }
   }
   return (
@@ -123,7 +126,7 @@ export const CreateProjectModal = () => {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <div className="grid grid-cols-4 items-center gap-4">
-                    <FormLabel className="text-right">Username</FormLabel>
+                    <FormLabel className="text-right">Title</FormLabel>
                     <FormControl className="col-span-3">
                       <Input placeholder="shadcn" {...field} />
                     </FormControl>

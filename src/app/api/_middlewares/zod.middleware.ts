@@ -8,12 +8,13 @@ type SchemaType = "body" | "params" | "search"
 type IZodSchemas = Partial<Record<SchemaType, Schema>>
 
 export const zodMiddleware = (handler: NextHandler, schema: IZodSchemas): NextHandler => async (req, { params }) => {
-  let body: unknown = req.body;
+  let reqClone = req.clone();
+  let body: unknown = reqClone.body;
   try {
     try {
-      if (body && schema.body) body = await req.json()
+      if (body && schema.body) body = await reqClone.json()
     } catch (error) { }
-    const { searchParams } = new URL(req.url)
+    const { searchParams } = new URL(reqClone.url)
     const objParams = Object.fromEntries(searchParams.entries())
 
     const schemaValues: Record<SchemaType, unknown> = {
@@ -21,7 +22,6 @@ export const zodMiddleware = (handler: NextHandler, schema: IZodSchemas): NextHa
       params,
       search: objParams
     }
-
     Object.entries(schema).forEach(([key, schema]) => validateSchemaType(schema, schemaValues[key as SchemaType]))
 
   } catch (error: unknown) {
@@ -32,7 +32,7 @@ export const zodMiddleware = (handler: NextHandler, schema: IZodSchemas): NextHa
       }, { status: 400 });
     }
   }
-
+  console.log('PASSED GOD :V')
   return handler(req, { params });
 };
 

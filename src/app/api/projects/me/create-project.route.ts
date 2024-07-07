@@ -1,12 +1,13 @@
-import createProject from "@/server/projects/create-project";
-// import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
 import type { NextHandler } from "@/types";
-import { type NextRequest, NextResponse } from "next/server";
-// import { Infer } from "@/globals";
+import type { NextRequest } from "next/server";
+import createProject from "@/server/projects/create-project";
+import { NextResponse } from "next/server";
+import { Infer } from "@/globals";
+import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
 
 export const createProjectHandler: NextHandler = async (req: NextRequest) => {
   try {
-    const body = req.body as unknown as Infer<typeof CreateProjectDto>;
+    const body = await req.json() as unknown as Infer<typeof CreateProjectDto>;
     const project = await createProject(body);
 
     return NextResponse.json({

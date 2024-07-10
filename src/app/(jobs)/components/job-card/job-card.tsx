@@ -52,9 +52,8 @@ export const JobCard = ({
 					{isNew && <Tag className="order-0 md:order-1">New post</Tag>}
 				</div>
 
-				<JobCard.Tags location={location} budget={budget} date={date} />
-
-				<Paragraph className="mt-2 text-neutral-600">{description}</Paragraph>
+				<JobCard.Tags textClassName="font-medium" location={location} budget={budget} date={date} />
+				<JobCard.Paragraph>{description}</JobCard.Paragraph>
 			</div>
 		</article>
 	);
@@ -69,28 +68,29 @@ interface JobCardTagsProps
 const JobTags = ({ location, budget, date, className, textClassName, ...props }: JobCardTagsProps) => {
 	return (
 		<div className={cn('mt-2 flex flex-wrap items-start gap-5 md:gap-10', className)} {...props}>
-			<JobCardTagsParagraph className={textClassName}>
+			<JobCardParagraph className={textClassName}>
 				<MapPin className="-mt-1 mr-1 inline-block align-middle" size={15} />
 				{location}
-			</JobCardTagsParagraph>
-			<JobCardTagsParagraph className={textClassName}>
+			</JobCardParagraph>
+			<JobCardParagraph className={textClassName}>
 				<CircleDollarSign className="-mt-1 mr-1 inline-block align-middle" size={15} />
 				{budget}k
-			</JobCardTagsParagraph>
-			<JobCardTagsParagraph className={textClassName}>
+			</JobCardParagraph>
+			<JobCardParagraph className={textClassName}>
 				<Calendar className="-mt-1 mr-1 inline-block align-middle" size={15} />
 				{date.toLocaleDateString()}
-			</JobCardTagsParagraph>
+			</JobCardParagraph>
 		</div>
 	);
 };
 
-interface JobCardTagsParagraphProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+interface JobCardParagraphProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-const JobCardTagsParagraph = ({ className, children, ...props }: JobCardTagsParagraphProps) => (
-	<Paragraph className={cn('font-medium text-neutral-600', className)} {...props}>
+const JobCardParagraph = ({ className, children, ...props }: JobCardParagraphProps) => (
+	<Paragraph className={cn('text-neutral-600', className)} {...props}>
 		{children}
 	</Paragraph>
 );
 
 JobCard.Tags = JobTags;
+JobCard.Paragraph = JobCardParagraph

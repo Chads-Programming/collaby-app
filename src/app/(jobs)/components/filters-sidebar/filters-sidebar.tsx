@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, FilterIcon } from "lucide-react";
+import { ChevronDown, FilterIcon, FilterX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
@@ -92,8 +92,13 @@ const GeneralFilter = () => {
 
 	return (
 		<Card className="w-full max-w-lg border-none md:shadow-md">
-			<CardHeader className="px-4 pt-4 pb-2">
+			<CardHeader className="flex w-full justify-between flex-row items-center px-4 pt-4 pb-2">
 				<CardTitle>Filters</CardTitle>
+				<Button variant="ghost" size="icon" asChild>
+					<Link href="/">
+						<FilterX />
+					</Link>
+				</Button>
 			</CardHeader>
 			<CardContent className="space-y-4 px-4">
 				<div className="space-y-2">

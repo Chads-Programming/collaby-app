@@ -26,9 +26,10 @@ const CardBody = ({ bodyClassName, title, description }: ICardBody) => (
 interface CardProps extends ICardBody {
   children?: React.ReactNode
   className?: string
+  footer?: React.ReactNode
 }
 
-export const CardWithImage = ({ children, imageUrl = "https://placehold.co/300x300.png?text=No+Image", className, ...card }: CardProps) => {
+export const CardWithImage = ({ children, footer, imageUrl = "https://placehold.co/300x300.png?text=No+Image", className, ...card }: CardProps) => {
   return (
     <div className={cn("rounded-xl dark:bg-zinc-950 bg-zinc-50 overflow-hidden p-2 border pb-3 h-fit", className)}>
       <div className="relative aspect-video">
@@ -40,11 +41,7 @@ export const CardWithImage = ({ children, imageUrl = "https://placehold.co/300x3
         />
       </div>
       <CardBody bodyClassName="text-gray-800 dark:text-gray-200 mb-2 relative" {...card} />
-      <div className="px-2">
-        <Button className="w-full rounded-lg" asChild>
-          <Link href="/docs/cards-with-image-bg">Edit</Link>
-        </Button>
-      </div>
+      {footer}
     </div>
   )
 }

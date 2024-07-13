@@ -21,8 +21,8 @@ export const CreateProjectDto = z.object({
   title: z.string().min(4),
   description: z.string().optional(),
   logoUrl: z.string().optional(),
-  size: z.enum(["ANY", "SMALL", "MEDIUM", "BIG"]),
-  remuneration: z.enum(["PAID", "VOLUNTEER", "STOCK"]),
-  role: z.enum(["BACKEND", "FRONTEND", "FULLSTACK"]),
-  links: z.array(ProjectLinksDto).optional() 
+  size: z.enum(["ANY", "SMALL", "MEDIUM", "BIG"]).default("ANY"),
+  remuneration: z.enum(["PAID", "VOLUNTEER", "STOCK"]).default("VOLUNTEER"),
+  role: z.enum(["BACKEND", "FRONTEND", "FULLSTACK"]).default("FULLSTACK"),
+  links: z.array(ProjectLinksDto).optional()
 });

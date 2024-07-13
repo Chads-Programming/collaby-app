@@ -10,7 +10,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import type { Infer } from "@/globals";
-import React from "react";
+import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
 import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
@@ -29,11 +29,14 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Uploader } from "@/app/components/common/uploader";
 import { LinkInputList } from "./link-input-list";
 import { useSWRConfig } from "swr";
+import { Projects } from "@prisma/client";
 
 async function createProject(
   url: string,
   { arg }: { arg: Infer<typeof CreateProjectDto> },
 ) {
+  console.log('ain')
+  console.log({ arg })
   return await fetch(url, {
     method: "POST",
     body: JSON.stringify(arg),
@@ -43,10 +46,12 @@ async function createProject(
     },
   });
 }
-
-export const CreateProjectModal = () => {
+interface ICreateProjectModal {
+  data?: Infer<typeof CreateProjectDto> & { id: string }
+}
+export const CreateProjectModal = ({ data }: ICreateProjectModal) => {
   const form = useForm<Infer<typeof CreateProjectDto>>({
-    defaultValues: {
+    defaultValues: data || {
       description: "Chad buenardop",
       title: "Chad god",
       role: "FULLSTACK",
@@ -54,16 +59,23 @@ export const CreateProjectModal = () => {
       logoUrl: "https://placehold.co/300x300.png?text=No+Image",
       remuneration: "VOLUNTEER",
     },
-    resolver: zodResolver(CreateProjectDto),
+    resolver: zodResolver(CreateProjectDto, {}),
   });
   const { handleSubmit, watch, setValue, control } = form;
+  const isEdit = useMemo(() => !!data?.id, [data])
+  const all = watch()
+  console.log({ all })
   const { mutate } = useSWRConfig();
   const projectImage = watch("logoUrl");
-
+  console.log({ data })
   const { trigger } = useSWRMutation("/api/projects/me", createProject);
   async function onSubmit(data: Infer<typeof CreateProjectDto>) {
     try {
-      const res = await trigger(data, {});
+      console.log('calli')
+      const res = await trigger(data, {
+
+      });
+      console.log('callin2')
       mutate(key => typeof key === 'string' && key.startsWith('/api/projects/me'))
       toast.success("New project created successfully")
     } catch (error) {
@@ -74,9 +86,9 @@ export const CreateProjectModal = () => {
   return (
     <SheetContent>
       <SheetHeader>
-        <SheetTitle>Create project</SheetTitle>
+        <SheetTitle>{isEdit ? "Create" : "Edit"} project</SheetTitle>
         <SheetDescription>
-          Make changes to your profile here. Click save when you re done.
+          Make changes to your project here. Click save when you re done.
         </SheetDescription>
       </SheetHeader>
       <Form {...form}>
@@ -162,7 +174,7 @@ export const CreateProjectModal = () => {
       </Form>
       <SheetFooter>
         <Button form="project-create" type="submit" className="mt-2">
-          Create
+          {isEdit ? "Edit" : "Create"}
         </Button>
       </SheetFooter>
     </SheetContent>

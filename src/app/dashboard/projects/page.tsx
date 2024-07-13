@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { CreateProjectModal } from "./components/create-project";
 import useSwr from 'swr'
 import { CardWithImage } from "@/app/components/common/card/card-with-image";
-import { Projects as IProject } from "@prisma/client";
+import { Projects as IProject, Projects } from "@prisma/client";
 import { Loader2 as Loader } from "lucide-react";
+import Link from "next/link";
+import { CreateProjectDto } from "@/server/projects/dtos/create-project.dto";
 
 const fetcher = (url: string) => fetch(url, { credentials: 'include' }).then(r => r.json()).then(({ data }) => data || [])
 
@@ -47,8 +49,34 @@ function ProjectList({ data, handleCreateProject, isLoading }: IProjectListProps
   if (isLoading) return <Loader className="mx-auto self-center animate-spin size-10" />
   if (!data.length) return <EmptyListContent openModal={handleCreateProject} />
   return <>
-    {data.map((data) => <CardWithImage className="min-w-[250px] max-w-[450px] lg:max-w-[320px] flex-1" key={data.id} title={data.title} description={data.description || undefined} imageUrl={data.logoUrl || undefined} />)}
+    {data.map((data) => <CardWithImage footer={<ProjectFooter project={data} />} className="min-w-[250px] max-w-[450px] lg:max-w-[320px] flex-1" key={data.id} title={data.title} description={data.description || undefined} imageUrl={data.logoUrl || undefined} />)}
   </>
+}
+
+interface IProjectFooterProps {
+  project: Projects
+}
+
+function ProjectFooter({ project }: IProjectFooterProps) {
+  const { openModal } = useModalStore();
+
+  function editProjectModal() {
+    try {
+      const data = CreateProjectDto.parse({ ...project, size: project.size || undefined, remuneration: project.remuneration || undefined, role: project.role || undefined }, {})
+      openModal({
+        component: CreateProjectModal,
+        props: { data: { ...data, id: project.id } }
+      })
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return (<div className="px-2">
+    <Button onClick={editProjectModal} className="w-full rounded-lg">Edit</Button>
+  </div>
+  )
 }
 
 interface IEmptyListProps {

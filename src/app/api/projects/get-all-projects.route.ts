@@ -6,8 +6,10 @@ import { ProjectFiltersDto } from "./me/dtos/project-filter.dto";
 export const getAllProjectHandler: NextHandler = async (req: NextRequest) => {
 	try {
 		const { searchParams } = new URL(req.url);
+    console.log('1')
 		const objParams = Object.fromEntries(searchParams.entries());
 		const params = ProjectFiltersDto.parse(objParams);
+    console.log('2')
 
 		console.log({ params });
 		const project = await getAllProjects({ count: 5, page: 0, ...params });

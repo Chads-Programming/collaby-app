@@ -1,10 +1,11 @@
-import { Heading, Paragraph, Tag } from '@/app/components';
-import { cn } from '@/lib/utils';
-import { Calendar, CircleDollarSign, MapPin } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Heading, Paragraph, Tag } from "@/app/components";
+import { cn } from "@/lib/utils";
+import { Calendar, CircleDollarSign, MapPin } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-interface JobCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface JobCardProps extends React.HTMLAttributes<HTMLDivElement> {
 	logo: string;
 	platform: string;
 	title: string;
@@ -30,7 +31,7 @@ export const JobCard = ({
 	...props
 }: JobCardProps) => {
 	return (
-		<article className={cn('items-start justify-start gap-5 bg-white p-5 shadow md:flex', className)} {...props}>
+		<article className={cn("items-start justify-start gap-5 bg-white p-5 shadow md:flex", className)} {...props}>
 			<div className="mb-5 flex items-center justify-start gap-2 md:mb-0 md:block">
 				{/* <Image */}
 				{/*   src={logo} */}
@@ -40,7 +41,7 @@ export const JobCard = ({
 				{/*   alt={"Logo"} */}
 				{/* /> */}
 
-				<img src={logo} className="w-10 md:w-24" alt={'Logo'} />
+				<img src={logo} className="w-10 md:w-24" alt={"Logo"} />
 				<Paragraph className="text-lg font-medium md:hidden">{platform}</Paragraph>
 			</div>
 			<div>
@@ -49,7 +50,7 @@ export const JobCard = ({
 					<Link href={`/project/${slug}`} className="md:order-0 order-1">
 						<Heading>{title}</Heading>
 					</Link>
-					{isNew && <Tag className="order-0 md:order-1">New post</Tag>}
+					{isNew && <JobCard.NewPostTag />}
 				</div>
 
 				<JobCard.Tags textClassName="font-medium" location={location} budget={budget} date={date} />
@@ -60,14 +61,14 @@ export const JobCard = ({
 };
 
 interface JobCardTagsProps
-	extends Pick<JobCardProps, 'location' | 'budget' | 'date'>,
+	extends Pick<JobCardProps, "location" | "budget" | "date">,
 		React.HTMLAttributes<HTMLDivElement> {
 	textClassName?: string;
 }
 
 const JobTags = ({ location, budget, date, className, textClassName, ...props }: JobCardTagsProps) => {
 	return (
-		<div className={cn('mt-2 flex flex-wrap items-start gap-5 md:gap-10', className)} {...props}>
+		<div className={cn("mt-2 flex flex-wrap items-start gap-5 md:gap-10", className)} {...props}>
 			<JobCardParagraph className={textClassName}>
 				<MapPin className="-mt-1 mr-1 inline-block align-middle" size={15} />
 				{location}
@@ -87,10 +88,19 @@ const JobTags = ({ location, budget, date, className, textClassName, ...props }:
 interface JobCardParagraphProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
 const JobCardParagraph = ({ className, children, ...props }: JobCardParagraphProps) => (
-	<Paragraph className={cn('text-neutral-600', className)} {...props}>
+	<Paragraph className={cn("text-neutral-600", className)} {...props}>
 		{children}
 	</Paragraph>
 );
 
+interface JobCardNewPostTagProps extends React.HTMLProps<HTMLSpanElement> {}
+
+const JobCardNewPostTag = ({ className, ...props }: JobCardNewPostTagProps) => (
+	<Tag className={cn("order-0 md:order-1", className)} {...props}>
+		New post
+	</Tag>
+);
+
 JobCard.Tags = JobTags;
-JobCard.Paragraph = JobCardParagraph
+JobCard.Paragraph = JobCardParagraph;
+JobCard.NewPostTag = JobCardNewPostTag;

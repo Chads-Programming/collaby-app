@@ -18,7 +18,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,14 +28,37 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Uploader } from "@/app/components/common/uploader";
 import { LinkInputList } from "./link-input-list";
 import { useSWRConfig } from "swr";
-import { Projects } from "@prisma/client";
+import { Remuneration, Role, Size } from "@prisma/client";
+import { Select, SelectItem as ISelectItem } from "@/components/ui/select";
+import _ from 'lodash'
+
+type IRemunerationItem = ISelectItem<Remuneration, Remuneration>;
+type ISizeItem = ISelectItem<Size, Size>;
+type IRoleItem = ISelectItem<Role, Role>;
+
+const SELECT_REMUNERATION: IRemunerationItem[] = Object.values(Remuneration).map((value) => ({
+  data: value,
+  label: _.capitalize(value),
+  value
+}));
+
+const SELECT_SIZE: ISizeItem[] = Object.values(Size).map((value) => ({
+  data: value,
+  label: _.capitalize(value),
+  value
+}));
+const SELECT_ROLE: IRoleItem[] = Object.values(Role).map((value) => ({
+  data: value,
+  label: _.capitalize(value),
+  value
+}));
+
+
 
 async function createProject(
   url: string,
   { arg }: { arg: Infer<typeof CreateProjectDto> },
 ) {
-  console.log('ain')
-  console.log({ arg })
   return await fetch(url, {
     method: "POST",
     body: JSON.stringify(arg),
@@ -52,8 +74,8 @@ interface ICreateProjectModal {
 export const CreateProjectModal = ({ data }: ICreateProjectModal) => {
   const form = useForm<Infer<typeof CreateProjectDto>>({
     defaultValues: data || {
-      description: "Chad buenardop",
-      title: "Chad god",
+      description: "Brief Description...",
+      title: "Example Project",
       role: "FULLSTACK",
       size: "ANY",
       logoUrl: "https://placehold.co/300x300.png?text=No+Image",
@@ -63,19 +85,12 @@ export const CreateProjectModal = ({ data }: ICreateProjectModal) => {
   });
   const { handleSubmit, watch, setValue, control } = form;
   const isEdit = useMemo(() => !!data?.id, [data])
-  const all = watch()
-  console.log({ all })
   const { mutate } = useSWRConfig();
   const projectImage = watch("logoUrl");
-  console.log({ data })
   const { trigger } = useSWRMutation("/api/projects/me", createProject);
   async function onSubmit(data: Infer<typeof CreateProjectDto>) {
     try {
-      console.log('calli')
-      const res = await trigger(data, {
-
-      });
-      console.log('callin2')
+      const res = await trigger(data, {});
       mutate(key => typeof key === 'string' && key.startsWith('/api/projects/me'))
       toast.success("New project created successfully")
     } catch (error) {
@@ -104,7 +119,7 @@ export const CreateProjectModal = ({ data }: ICreateProjectModal) => {
                   </Label>
                   <FormControl>
                     <Uploader
-                      className="col-span-3"
+                      className="ml-1 col-span-3"
                       onClientUploadComplete={(res: { url: string }[]) => {
                         // Do something with the response
                         if (res.length === 0) return;
@@ -139,7 +154,7 @@ export const CreateProjectModal = ({ data }: ICreateProjectModal) => {
                 <FormItem className="w-full">
                   <div className="grid grid-cols-4 items-center gap-4">
                     <FormLabel className="text-right">Title</FormLabel>
-                    <FormControl className="col-span-3">
+                    <FormControl className="ml-1 col-span-3">
                       <Input placeholder="shadcn" {...field} />
                     </FormControl>
                   </div>
@@ -155,7 +170,7 @@ export const CreateProjectModal = ({ data }: ICreateProjectModal) => {
                 <FormItem className="w-full">
                   <div className="grid grid-cols-4 items-center gap-4">
                     <FormLabel className="text-right">Description</FormLabel>
-                    <FormControl className="col-span-3">
+                    <FormControl className="ml-1 col-span-3">
                       <Input placeholder="shadcn" {...field} />
                     </FormControl>
                     <FormMessage />
@@ -163,6 +178,61 @@ export const CreateProjectModal = ({ data }: ICreateProjectModal) => {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={control}
+              name="remuneration"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Remuneration</FormLabel>
+                    <FormControl className="ml-1 col-span-3">
+                      <Select value={field.value} className="w-full" onSelect={({ value }) => setValue('remuneration', value)} items={SELECT_REMUNERATION} renderValue={SelectItem}>
+                        {SelectItem}
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={control}
+              name="size"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Size</FormLabel>
+                    <FormControl className="ml-1 col-span-3">
+                      <Select value={field.value} className="w-full" onSelect={({ value }) => setValue('size', value)} items={SELECT_SIZE} renderValue={SelectItem}>
+                        {SelectItem}
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={control}
+              name="role"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <FormLabel className="text-right">Role</FormLabel>
+                    <FormControl className="ml-1 col-span-3">
+                      <Select value={field.value} className="w-full" onSelect={({ value }) => setValue('role', value)} items={SELECT_ROLE} renderValue={SelectItem}>
+                        {SelectItem}
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
+
           </div>
           <div className="flex w-full flex-col items-start gap-2">
             <span className="mb-2 text-right text-sm font-medium">
@@ -181,28 +251,7 @@ export const CreateProjectModal = ({ data }: ICreateProjectModal) => {
   );
 };
 
-/* tags multiselect
-// {
-//    <div className="grid grid-cols-4 items-center gap-4">
-//     <Controller
-//        name="tags"
-//               control={control}
-//               render={({ field: { onChange, onBlur, value } }) => (
-//                 <MultiSelect
-//                   placeholder="Technologies"
-//                   options={TECHNOLOGIES.map((tech) => ({
-//                     value: tech,
-//                     label: tech,
-//                   }))}
-//                   onChange={(val) => {
-//                     console.log(val, value);
-//                     onChange([...value, val]);
-//                   }}
-//                   onBlur={onBlur}
-//                   value={value}
-//                 />
-//               )}
-//             />
-//           </div>
-// }
-*/
+
+function SelectItem({ label }: ISelectItem) {
+  return <span>{label}</span>
+}

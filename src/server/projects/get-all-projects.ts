@@ -10,16 +10,6 @@ export default async function getAllProjects({
   count,
 }: Infer<typeof ProjectFiltersDto>) {
   try {
-    console.log({
-      where: {
-        size: size || undefined,
-      },
-      orderBy: {
-        createdAt: "desc"
-      },
-      take: count,
-      skip: (count ?? 10) * (page ?? 0),
-    })
     const projects = await prisma.projects.findMany({
       where: {
         size: size || undefined,
@@ -27,8 +17,8 @@ export default async function getAllProjects({
       orderBy: {
         createdAt: "desc"
       },
-      take: count,
-      skip: (count ?? 10) * (page ?? 0),
+      take: 2,
+      skip: (count ?? 10) * (page ?? 0)
     });
 
     console.log("executed", projects);

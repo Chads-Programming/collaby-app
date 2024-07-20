@@ -8,12 +8,10 @@ export default async function createProject(
   try {
     const project = await prisma.projects.create({
       data: {
-        title: data.title,
-        logoUrl: data.logoUrl,
-        description: data.description,
+        ...data,
+        links: undefined
       },
     });
-    console.log(JSON.stringify({ newProject: project }, null, 2))
     return project;
   } catch (error) {
     console.log(error);

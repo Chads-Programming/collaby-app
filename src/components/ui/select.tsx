@@ -6,34 +6,36 @@ import { cn } from "@/lib/utils";
 import { Button } from "./button";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
-export interface SelectItem<T> {
-  value: number | string;
+export interface SelectItem<T = any, Value = string | number> {
+  value: Value;
   label: string;
   data: T;
 }
 
-interface Props<T> {
-  items: SelectItem<T>[];
+interface Props<T, Value> {
+  items: SelectItem<T, Value>[];
   placeholder?: string;
-  value?: number | string;
-  renderValue?: (item: SelectItem<T>, selected: boolean) => React.ReactNode;
-  onSelect: (item: SelectItem<T>) => void;
-  children: (item: SelectItem<T>, selected: boolean) => React.ReactNode;
+  value?: Value;
+  renderValue?: (item: SelectItem<T, Value>, selected: boolean) => React.ReactNode;
+  onSelect: (item: SelectItem<T, Value>) => void;
+  children: (item: SelectItem<T, Value>, selected: boolean) => React.ReactNode;
+  className?: string
 }
 
-export const Select = <T,>({
+export const Select = <T, Value extends string | number>({
   items,
   value,
   placeholder = "Select an option",
   onSelect,
   children: renderItem,
   renderValue = renderItem,
-}: Props<T>) => {
-  const [currentValue, setSelectedValue] = useState(value?.toString());
+  className
+}: Props<T, Value>) => {
+  const [currentValue, setSelectedValue] = useState<Value | undefined>(value);
   const [isOpen, setOpen] = useState(false);
-
+  console.log({ currentValue })
   const valueContent = useMemo(() => {
-    const option = items.find((item) => item.value.toString() === currentValue);
+    const option = items.find((item) => item.value === currentValue);
 
     if (!option) {
       return placeholder;
@@ -49,7 +51,7 @@ export const Select = <T,>({
           variant="outline"
           role="combobox"
           aria-expanded={isOpen}
-          className="min-w-14 justify-between px-1"
+          className={cn("min-w-14 justify-between px-1", className)}
         >
           {valueContent}
           {
@@ -72,7 +74,7 @@ export const Select = <T,>({
                 key={item.value}
                 className="my-1 cursor-pointer rounded-md transition ease-in hover:bg-primary/50"
                 onClick={() => {
-                  setSelectedValue(item.value.toString());
+                  setSelectedValue(item.value);
                   setOpen(false);
                   onSelect(item);
                 }}

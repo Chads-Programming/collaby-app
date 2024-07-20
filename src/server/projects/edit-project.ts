@@ -12,9 +12,8 @@ export default async function updateProject(
         id,
       },
       data: {
-        title: data.title,
-        logoUrl: data.logoUrl,
-        description: data.description,
+        ...data,
+        links: undefined
       },
     });
 

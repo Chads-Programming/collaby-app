@@ -30,8 +30,8 @@ interface LinkTypeEntry {
   type: LinkType;
 }
 
-const ITEMS: SelectItem<LinkTypeEntry>[] = Object.entries(LinkType).map(
-  ([_, value]) => ({ data: { type: value }, label: value, value }),
+const ITEMS: SelectItem<LinkTypeEntry, LinkType>[] = Object.values(LinkType).map(
+  (value) => ({ data: { type: value }, label: value, value }),
 );
 
 const ICONS = {

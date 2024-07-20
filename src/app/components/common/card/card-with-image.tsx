@@ -27,11 +27,13 @@ interface CardProps extends ICardBody {
   children?: React.ReactNode
   className?: string
   footer?: React.ReactNode
+  actions?: React.ReactNode
 }
 
-export const CardWithImage = ({ children, footer, imageUrl = "https://placehold.co/300x300.png?text=No+Image", className, ...card }: CardProps) => {
+export const CardWithImage = ({ children, footer, actions, imageUrl = "https://placehold.co/300x300.png?text=No+Image", className, ...card }: CardProps) => {
   return (
-    <div className={cn("rounded-xl dark:bg-zinc-950 bg-zinc-50 overflow-hidden p-2 border pb-3 h-fit", className)}>
+    <div className={cn("rounded-xl dark:bg-zinc-950 bg-zinc-50 overflow-hidden p-2 border pb-3 h-fit relative", className)}>
+      {actions}
       <div className="relative aspect-video">
         <Image
           fill

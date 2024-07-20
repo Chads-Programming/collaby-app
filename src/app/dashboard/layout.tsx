@@ -51,7 +51,7 @@ export default function DashboardLayout({ children, modal }: { children: React.R
               </Button>
             </div>
             <Navbar />
-            <ProUpgrade />
+            {/*<ProUpgrade />*/}
           </div>
         </div>
         <div className="flex flex-col">

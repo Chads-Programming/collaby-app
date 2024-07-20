@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { UpdateProjectDto } from "@/server/projects/dtos/update-project.dto";
 import updateProject from "@/server/projects/edit-project";
 import type { NextHandler } from "@/types";
-import type { BodyProject } from "../types";
+import { BodyProject } from "../../types";
 
 export const editProjectHandler: NextHandler = async (
   req: NextRequest,

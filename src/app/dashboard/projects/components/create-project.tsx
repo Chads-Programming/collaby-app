@@ -28,32 +28,9 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Uploader } from "@/app/components/common/uploader";
 import { LinkInputList } from "./link-input-list";
 import { useSWRConfig } from "swr";
-import { Remuneration, Role, Size } from "@prisma/client";
 import { Select, SelectItem as ISelectItem } from "@/components/ui/select";
-import _ from 'lodash'
-
-type IRemunerationItem = ISelectItem<Remuneration, Remuneration>;
-type ISizeItem = ISelectItem<Size, Size>;
-type IRoleItem = ISelectItem<Role, Role>;
-
-const SELECT_REMUNERATION: IRemunerationItem[] = Object.values(Remuneration).map((value) => ({
-  data: value,
-  label: _.capitalize(value),
-  value
-}));
-
-const SELECT_SIZE: ISizeItem[] = Object.values(Size).map((value) => ({
-  data: value,
-  label: _.capitalize(value),
-  value
-}));
-const SELECT_ROLE: IRoleItem[] = Object.values(Role).map((value) => ({
-  data: value,
-  label: _.capitalize(value),
-  value
-}));
-
-
+import { SELECT_REMUNERATION, SELECT_ROLE, SELECT_SIZE } from "../constants";
+import SelectItem from "@/app/components/common/select/select-item";
 
 async function createProject(
   url: string,
@@ -251,7 +228,3 @@ export const CreateProjectModal = ({ data }: ICreateProjectModal) => {
   );
 };
 
-
-function SelectItem({ label }: ISelectItem) {
-  return <span>{label}</span>
-}
